@@ -4,7 +4,6 @@ import com.githib.grading.entity.User;
 import com.githib.grading.utils.HibernateSessionFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import java.util.List;
 

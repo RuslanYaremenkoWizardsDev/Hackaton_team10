@@ -14,6 +14,6 @@ export const validatePassword = (password) => {
 
 export const compare = (left, right, node) => {
   if (left === right) return true;
- renderError(node, 'password !== confirm password')
+ renderError(node, 'password does not match');
  return false;
 };

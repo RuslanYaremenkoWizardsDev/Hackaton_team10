@@ -36,7 +36,7 @@ export const regInit = () => {
         redirect("main.html");
       })
       .catch((e) => {
-        return renderError(errorText, "Server drop");
+        return renderError(errorText, "Server is not responding");
       });
   });
 
@@ -58,6 +58,9 @@ export const regInit = () => {
       };
 
       const authURL = URL + "reg";
+
+      errorText.textContent = '';
+
       postRequest(authURL, options)
         .then((data) => {
           if (data.status === 200) {
@@ -72,7 +75,7 @@ export const regInit = () => {
           }
         })
         .catch((e) => {
-          return renderError(errorText, "Server drop");
+          return renderError(errorText, "Server is not responding");
         });
     } else {
       const loginValid = validateLogin(login.value);

@@ -1,2 +1,131 @@
-@import 'reset.scss';
+@import "reset.scss";
+@import "variables.scss";
+@import "registration.scss";
 
+.main {
+  &-page {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 150px;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1170px;
+  width: 100%;
+}
+
+.filters-group {
+  justify-content: space-between;
+  display: flex;
+  width: 100%;
+  padding: 20px 0;
+  &__input {
+    width: 200px;
+    height: 30px;
+    border-radius: 7px;
+    background-color: $bg-light-gray-2;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    color: #000;
+  }
+
+  &__button {
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #f55c47;
+  }
+}
+
+.table {
+  &__header {
+    display: flex;
+    width: 100%;
+    height: 80px;
+  }
+
+  &__item {
+    height: 60px;
+    background-color: $text-light-gray;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 1.6rem;
+    color: $bg-purple;
+    border: 1px solid $text-white;
+
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3) {
+      width: 10%;
+    }
+    &:nth-child(4),
+    &:nth-child(5) {
+      width: 15%;
+    }
+    &:nth-child(6),
+    &:nth-child(7) {
+      width: 10%;
+    }
+    &:nth-child(8),
+    &:nth-child(9) {
+      width: 15%;
+    }
+    &:nth-child(10) {
+      width: 10%;
+    }
+  }
+
+  &__content {
+    display: flex;
+    &-item {
+      background-color: $bg-light-gray-2;
+    }
+  }
+}
+
+.tabs {
+  margin-top: 30px;
+}
+
+.tabs > input[type="radio"] {
+  display: none;
+}
+
+.tabs > input[type="radio"]:checked + label {
+  background-color: $text-pink;
+}
+
+#tab-btn-1:checked ~ #tournaments,
+#tab-btn-2:checked ~ #create-tournaments,
+#tab-btn-3:checked ~ #stats {
+  display: block;
+}
+
+.tabs > label {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  background-color: $bg-purple;
+  border: 1px solid transparent;
+  padding: 2px 8px;
+  font-size: 16px;
+  line-height: 1.5;
+  border-radius: 4px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
+  margin-left: 6px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.tabs > label:first-of-type {
+  margin-left: 0;
+}

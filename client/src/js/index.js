@@ -24,10 +24,12 @@ export const init = () => {
         type: "authorization",
       };
       const options = {
+        method: 'POST',
         body: JSON.stringify(bodyObject),
       };
 
       const authURL = URL + "auth";
+      console.log(authURL);
       postRequest(authURL, options).then((data) => {
         if (data.token) {
           setCookie("token", data.token);
@@ -35,7 +37,7 @@ export const init = () => {
           setLocalStorage('role', data.role);
         }
         else {
-            // отрисоываем ошибку
+           
         }
       });
     }

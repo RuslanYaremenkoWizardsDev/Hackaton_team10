@@ -9,3 +9,4 @@ export const validatePassword = (password) => {
   if (!reg.test(password)) return false;
   return true;
 };
+

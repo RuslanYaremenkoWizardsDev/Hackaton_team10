@@ -1,3 +1,5 @@
+import {renderError} from './render'
+
 export const validateLogin = (login) => {
   const reg = new RegExp(/^[a-zA-Z0-9]{3,25}/, "i");
   if (!reg.test(login)) return false;
@@ -10,3 +12,8 @@ export const validatePassword = (password) => {
   return true;
 };
 
+export const compare = (left, right, node) => {
+  if (left === right) return true;
+ renderError(node, 'password !== confirm password')
+ return false;
+};

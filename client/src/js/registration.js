@@ -6,10 +6,10 @@ import {
   compare,
 } from "./helpers/validation.js";
 import { postRequest, URL } from "./helpers/request.js";
-import { setCookie } from "./helpers/cookieHelper.js";
 import { redirect } from "./helpers/redirect.js";
+import { renderError } from "./helpers/render.js";
 
-export const init = () => {
+export const regInit = () => {
   //login nodes
   const regForm = document.querySelector("form");
   const login = regForm.login;
@@ -17,6 +17,8 @@ export const init = () => {
   const confirm = regForm.confirm;
   const guestLink = document.querySelector("#guest");
   const signButton = document.querySelector("#submit-reg");
+  const errorText = document.querySelector(".error-text");
+
 
   guestLink.addEventListener("click", (e) => {
     e.preventDefault();
@@ -28,13 +30,14 @@ export const init = () => {
       body: JSON.stringify(bodyObject),
     };
     const authURL = URL + "auth";
-    postRequest(authURL, options).then((data) => {
-      setLocalStorage("role", data.role);
-      redirect("main.html");
-    }).catch((e)=>{
-      // render Error
-      console.log('fronter', e);
-    })
+    postRequest(authURL, options)
+      .then((data) => {
+        setLocalStorage("role", data.role);
+        redirect("main.html");
+      })
+      .catch((e) => {
+        return renderError(errorText, "Server drop");
+      });
   });
 
   signButton.addEventListener("click", (event) => {
@@ -42,8 +45,7 @@ export const init = () => {
     const valid =
       validateLogin(login.value) &&
       validatePassword(password.value) &&
-      compare(password.value, confirm.value);
-    console.log(valid);
+      compare(password.value, confirm.value, errorText);
     if (valid) {
       const bodyObject = {
         login: login.value,
@@ -55,18 +57,40 @@ export const init = () => {
         body: JSON.stringify(bodyObject),
       };
 
-      const authURL = URL + "auth";
-      postRequest(authURL, options).then((data) => {
-        if (data.token) {
-          setCookie("token", data.token);
-          redirect("main.html");
-          setLocalStorage("role", data.role);
-        } else {
-          //renderError()
-        }
-      });
+      const authURL = URL + "reg";
+      postRequest(authURL, options)
+        .then((data) => {
+          if (data.status === 200) {
+            redirect("index.html");
+          } else {
+            if (data.status === 401) {
+              return renderError(
+                errorText,
+                "We have this user. please use Another login"
+              );
+            }
+          }
+        })
+        .catch((e) => {
+          return renderError(errorText, "Server drop");
+        });
+    } else {
+      const loginValid = validateLogin(login.value);
+      const passValid = validatePassword(password.value);
+      if (!loginValid) {
+        return renderError(
+          errorText,
+          "login length must be more then 3 symbols and less 25 symbols. Only latin characters and numberic in it"
+        );
+      }
+      if (!passValid) {
+        return renderError(
+          errorText,
+          "password length must be more then 6 symbols and less 25 symbols. Only latin characters and numberic in it"
+        );
+      }
     }
   });
 };
 
-init();
+regInit();

@@ -11,8 +11,6 @@ export const init = () => {
   const password = regForm.password;
 
   const signButton = document.querySelector("#submit-auth");
-  const signIn = document.querySelector(".box-auth__link");
-
   signButton.addEventListener("click", (event) => {
     event.preventDefault();
     const valid =
@@ -27,9 +25,7 @@ export const init = () => {
         method: 'POST',
         body: JSON.stringify(bodyObject),
       };
-
       const authURL = URL + "auth";
-      console.log(authURL);
       postRequest(authURL, options).then((data) => {
         if (data.token) {
           setCookie("token", data.token);
@@ -37,11 +33,12 @@ export const init = () => {
           setLocalStorage('role', data.role);
         }
         else {
-           
+           console.log('render такого пользователя не существует')
         }
       });
     }
   });
+
 };
 
 init();

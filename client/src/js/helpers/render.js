@@ -1,0 +1,1 @@
+export const renderError = (node, value) => node.textContent = value;

@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user", schema = "public", catalog = "mydb")
+@Table(name = "user", schema = "public", catalog = "d3dhbnnbhpdelm")
 public class User {
 
     @Id
@@ -151,5 +151,21 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, email, login, password, age, city, hobby, role);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", age=" + age +
+                ", city='" + city + '\'' +
+                ", hobby='" + hobby + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

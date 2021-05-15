@@ -12,5 +12,8 @@
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+
+        <mapping class="com.githib.grading.entity.User"/>
+
     </session-factory>
 </hibernate-configuration>

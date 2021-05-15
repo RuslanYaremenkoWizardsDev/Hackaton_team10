@@ -1,54 +1,63 @@
 package com.githib.grading.entity;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
+@Entity
+@Table(name = "user", schema = "public", catalog = "mydb")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
 
+    @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "email",unique = true)
     private String email;
 
+    @Column(name = "login",unique = true)
     private String login;
 
+    @Column(name = "password")
     private String password;
 
-    private String phoneNumber;
+    private int age;
 
-    private String nickname;
+    private String city;
+
+    private String hobby;
 
     private String role;
 
-    private Date date_of_creation;
+    public User() {
+    }
+
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
 
     public User(long l, String firstName, String lastName, String email, String login, String nickname, String password, String phone) {
     }
 
-
-    public User(long id,
-                String firstName,
-                String lastName,
-                String email,
-                String login,
-                String password,
-                String phoneNumber,
-                String nickname,
-                String role,
-                Date date_of_creation) {
+    public User(long id, String firstName, String lastName, String email, String login, String password, int age, String city, String hobby, String role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.login = login;
         this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.nickname = nickname;
+        this.age = age;
+        this.city = city;
+        this.hobby = hobby;
         this.role = role;
-        this.date_of_creation = date_of_creation;
     }
 
     public long getId() {
@@ -99,20 +108,28 @@ public class User {
         this.password = password;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public int getAge() {
+        return age;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getCity() {
+        return city;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(String hobby) {
+        this.hobby = hobby;
     }
 
     public String getRole() {
@@ -123,45 +140,16 @@ public class User {
         this.role = role;
     }
 
-    public Date getDate_of_creation() {
-        return date_of_creation;
-    }
-
-    public void setDate_of_creation(Date date_of_creation) {
-        this.date_of_creation = date_of_creation;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(login, user.login) &&
-                Objects.equals(nickname, user.nickname) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(phoneNumber, user.phoneNumber);
+        return id == user.id && age == user.age && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(login, user.login) && Objects.equals(password, user.password) && Objects.equals(city, user.city) && Objects.equals(hobby, user.hobby) && Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, login, nickname, password, phoneNumber);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", login='" + login + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+        return Objects.hash(id, firstName, lastName, email, login, password, age, city, hobby, role);
     }
 }

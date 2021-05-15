@@ -13,7 +13,6 @@ public class UserRepository implements IUserRepository{
     public UserRepository() {
     }
 
-
     @Override
     public User findById(int id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(User.class, id);

@@ -1,5 +1,6 @@
 package com.githib.grading.handlers;
 
+import com.githib.grading.network.Broker;
 import com.githib.grading.network.WebsocketConnectionPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,17 +9,17 @@ import javax.websocket.OnMessage;
 import javax.websocket.Session;
 
 public class WebsocketHandler {
-//
-//    private final Logger logger = LoggerFactory.getLogger(WebsocketHandler.class);
-//
-//    private final WebsocketConnectionPool websocketConnectionPool;
-//
-//    private final Broker broker;
-//
-//    public WebsocketHandler(WebsocketConnectionPool websocketConnectionPool, Broker broker) {
-//        this.websocketConnectionPool = websocketConnectionPool;
-//        this.broker = broker;
-//    }
+
+    private final Logger logger = LoggerFactory.getLogger(WebsocketHandler.class);
+
+    private final WebsocketConnectionPool websocketConnectionPool;
+
+    private final Broker broker;
+
+    public WebsocketHandler(WebsocketConnectionPool websocketConnectionPool, Broker broker) {
+        this.websocketConnectionPool = websocketConnectionPool;
+        this.broker = broker;
+    }
 //
 //    @OnMessage
 //    public void messages(Session session, String payload) {

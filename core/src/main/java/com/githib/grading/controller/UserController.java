@@ -21,8 +21,6 @@ public class UserController implements IUserController {
     @Override
     public String authorize(UserAuthorizationDto userAuthDto) {
         User user = userRepository.findByLogin(userAuthDto.getLogin());
-
-
         Token token = new Token(
                 user.getLogin(),
                 System.currentTimeMillis(),

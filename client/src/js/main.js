@@ -14,14 +14,14 @@ export const MainInit = () => {
   const nav = document.getElementById("nav");
   let data = JSON.parse(localStorage.getItem("data"));
 
-  if (data !== "admin") {
-    for (let i = 0; i < tabsInput.length; i++) {
-      tabsInput[i].classList.add("hidden");
-    }
-  }
+  // if (data !== "admin") {
+  //   for (let i = 0; i < tabsInput.length; i++) {
+  //     tabsInput[i].classList.add("hidden");
+  //   }
+  // }
 
   getRequest(URLTOURNAMENTS).then((data) => {
-    console.log(data);
+    // console.log(data);
     renderAllTournaments(data);
     localStorage.setItem("data", JSON.stringify(data));
   });
@@ -53,9 +53,9 @@ export const MainInit = () => {
       console.log("value_____", value);
       let date = new Date(value);
       let newDate = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
-      console.log("newDate", newDate);
+      // console.log("newDate", newDate);
       el.date_created === newDate;
-      console.log("el.date_created", el.date_created);
+      // console.log("el.date_created", el.date_created);
     });
     const table = document.querySelector("#tournamentsContainer");
     table.innerHTML = "";

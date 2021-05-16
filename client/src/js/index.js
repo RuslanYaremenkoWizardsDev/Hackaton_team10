@@ -48,6 +48,7 @@ export const IndexInit = () => {
       };
       const options = {
         method: "POST",
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(bodyObject),
       };
       const authURL = URL + "auth";
@@ -72,18 +73,8 @@ export const IndexInit = () => {
     } else {
       const passwordValid = validatePassword(password.value);
       const loginValid = validateLogin(login.value);
-      if (!loginValid) {
-        return renderError(
-          errorText,
-          "login length must be more then 3 symbols and less 25 symbols. Only latin characters and numberic in it"
-        );
-      }
-      if (!passwordValid) {
-        return renderError(
-          errorText,
-          "Password length must be more then 6 symbols and less 25 symbols. Only latin characters and numberic in it"
-        );
-      }
+      if (!loginValid) return renderError(errorText,"login length must be more then 3 symbols and less 25 symbols. Only latin characters and numberic in it");
+      if (!passwordValid) return renderError(errorText,"Password length must be more then 6 symbols and less 25 symbols. Only latin characters and numberic in it");
     }
   });
 };

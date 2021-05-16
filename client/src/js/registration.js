@@ -50,19 +50,23 @@ export const regInit = () => {
       const bodyObject = {
         login: login.value,
         password: password.value,
+        confirmPassword: confirm.value,
         type: "registration",
       };
       const options = {
         method: "POST",
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(bodyObject),
       };
+      console.log(options.body);
 
-      const authURL = URL + "reg";
+      const authURL = URL + "login";
 
       errorText.textContent = '';
 
       postRequest(authURL, options)
         .then((data) => {
+          console.log(data);
           if (data.status === 200) {
             redirect("index.html");
           } else {
@@ -75,6 +79,7 @@ export const regInit = () => {
           }
         })
         .catch((e) => {
+          console.log(e);
           return renderError(errorText, "Server is not responding");
         });
     } else {

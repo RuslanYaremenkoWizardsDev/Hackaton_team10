@@ -6,48 +6,49 @@ export const renderAllTournaments = (data) => {
   let tournamentsContainer = document.getElementById("tournamentsContainer");
 
   data.forEach((item) => {
+    console.log(item);
     let content = document.createElement("div");
     content.classList.add("table__content-item");
 
     let fieldName = document.createElement("p");
     fieldName.classList.add("table__content-item", "table__item");
-    fieldName.textContent = item._id;
+    fieldName.textContent = item.id;
 
     let fieldMode = document.createElement("p");
     fieldMode.classList.add("table__content-item", "table__item");
-    fieldMode.textContent = item.number;
+    fieldMode.textContent = item.name;
 
     let fieldPlace = document.createElement("p");
     fieldPlace.classList.add("table__content-item", "table__item");
-    fieldPlace.textContent = item.date_supplied;
+    fieldPlace.textContent = item.mode;
 
     let fieldStartDate = document.createElement("p");
     fieldStartDate.classList.add("table__content-item", "table__item");
-    fieldStartDate.textContent = item.date_supplied;
+    fieldStartDate.textContent = item.place;
 
     let fieldLastDate = document.createElement("p");
     fieldLastDate.classList.add("table__content-item", "table__item");
-    fieldLastDate.textContent = item.date_supplied;
+    fieldLastDate.textContent = item.startDate;
 
     let fieldState = document.createElement("p");
     fieldState.classList.add("table__content-item", "table__item");
-    fieldState.textContent = item.date_supplied;
+    fieldState.textContent = item.lastRegistrationDate;
 
     let fieldLevel = document.createElement("p");
     fieldLevel.classList.add("table__content-item", "table__item");
-    fieldLevel.textContent = item.date_supplied;
+    fieldLevel.textContent = item.numberOfParticipants;
 
     let fieldParticipants = document.createElement("p");
     fieldParticipants.classList.add("table__content-item", "table__item");
-    fieldParticipants.textContent = item.date_supplied;
+    fieldParticipants.textContent = item.scenarioForTournament;
 
     let fieldScenario = document.createElement("p");
     fieldScenario.classList.add("table__content-item", "table__item");
-    fieldScenario.textContent = item.date_supplied;
+    fieldScenario.textContent = item.numberOfParticipants;
 
     let fieldActions = document.createElement("div");
     fieldActions.classList.add("table__content-item", "table__item");
-    fieldActions.textContent = item.date_supplied;
+    fieldActions.textContent = item.levelOfTournament;
 
     content.append(fieldName);
     content.append(fieldMode);

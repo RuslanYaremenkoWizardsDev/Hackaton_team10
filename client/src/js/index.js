@@ -32,7 +32,7 @@ export const IndexInit = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bodyObject),
     };
-    const authURL = URL + "auth";
+    const authURL = URL + "user/auth";
     postRequest(authURL, options)
       .then((data) => {
         renderText(errorText, "");

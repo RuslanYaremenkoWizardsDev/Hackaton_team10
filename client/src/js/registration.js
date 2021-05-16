@@ -28,10 +28,8 @@ export const regInit = () => {
   signButton.addEventListener("click", (event) => {
     event.preventDefault();
     renderText(errorText, "");
-    const valid =
-      validateLogin(login.value) &&
-      validatePassword(password.value) &&
-      compare(password.value, confirm.value, errorText);
+    const valid = validateLogin(login.value) &&  validatePassword(password.value) && compare(password.value, confirm.value, errorText);
+      console.log('valid' ,valid);
     if (valid) {
       const bodyObject = {
         login: login.value,
@@ -44,12 +42,12 @@ export const regInit = () => {
         body: JSON.stringify(bodyObject),
       };
 
-      const authURL = URL + "registration";
+      const authURL = URL + "user/registration";
       renderText(errorText, "");
       postRequest(authURL, options)
         .then((data) => {
-          console.log(data);
-          if (data.status === 200) {
+          console.log(data.status);
+          if (data.status === 202) {
             redirect("index.html");
           } else {
             if (data.status === 401) {

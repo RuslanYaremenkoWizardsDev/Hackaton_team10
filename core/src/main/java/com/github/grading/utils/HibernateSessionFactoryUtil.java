@@ -1,17 +1,24 @@
 package com.github.grading.utils;
 
+import com.github.grading.entity.Game;
+import com.github.grading.entity.Player;
+import com.github.grading.entity.Tournament;
+import com.github.grading.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 import java.io.File;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class HibernateSessionFactoryUtil {
 
@@ -25,19 +32,24 @@ public class HibernateSessionFactoryUtil {
     }
 
     private static SessionFactory getSessionFactory() {
-        try {
-            if (sessionFactory == null) {
-                Configuration configuration = new Configuration().configure();
-                for (Class cls : getEntityClassesFromPackage("com.github.grading.entity")) {
-                    configuration.addAnnotatedClass(cls);
-                }
-                StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-                sessionFactory = configuration.buildSessionFactory(builder.build());
+        if (sessionFactory == null) {
+            try {
+                Configuration configuration = new Configuration();
+                ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+                configuration.addAnnotatedClass(User.class);
+                configuration.addAnnotatedClass(Game.class);
+                configuration.addAnnotatedClass(Player.class);
+                configuration.addAnnotatedClass(Tournament.class);
+//                for (Class cls : getEntityClassesFromPackage("com.github.grading.entity")) {
+//                    configuration.addAnnotatedClass(cls);
+//                }
+//                StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+                sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            }catch(Exception e) {
+                e.printStackTrace();
+                throw new RuntimeException("There is issue in hibernate util");
             }
-        } catch (Exception e) {
-            System.out.println("Exception" + e);
         }
-
         return sessionFactory;
     }
 

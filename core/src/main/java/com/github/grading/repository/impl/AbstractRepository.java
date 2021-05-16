@@ -18,17 +18,22 @@ public abstract class AbstractRepository <T, K extends Serializable> implements 
     @Override
     public T save(T entity) {
         getSession().save(entity);
+        getSession().close();
         return entity;
     }
 
     @Override
     public T getOne(K id) {
-        return getSession().getReference(getDomainClass(), id);
+        T obj = getSession().getReference(getDomainClass(), id);
+        getSession().close();
+        return obj;
     }
 
     @Override
     public T findOne(K id) {
-        return getSession().find(getDomainClass(), id);
+        T obj = getSession().find(getDomainClass(), id);
+        getSession().close();
+        return obj;
     }
 
     @Override
@@ -37,33 +42,41 @@ public abstract class AbstractRepository <T, K extends Serializable> implements 
         CriteriaQuery<T> criteriaQuery = builder.createQuery(getDomainClass());
         criteriaQuery.from(getDomainClass());
         TypedQuery<T> query = getSession().createQuery(criteriaQuery);
+        getSession().close();
         return query.getResultList();
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public T update(T entity) {
-        return (T) getSession().merge(entity);
+        T obj = (T)getSession().merge(entity);
+        getSession().close();
+        return obj;
     }
 
     @Override
     public void delete(T entity) {
         getSession().remove(entity);
+        getSession().close();
     }
 
     @Override
     public void delete(K id) {
         getSession().remove(getOne(id));
+        getSession().close();
     }
 
     @Override
     public void deleteAll() {
         getSession().createQuery("delete " + getDomainClassName()).executeUpdate();
+        getSession().close();
     }
 
     @Override
     public long count() {
-        return (long) getSession().createQuery("Select count(*) from " + getDomainClassName()).getSingleResult();
+        long result = (long) getSession().createQuery("Select count(*) from " + getDomainClassName()).getSingleResult();
+        getSession().close();
+        return result;
     }
 
     @Override

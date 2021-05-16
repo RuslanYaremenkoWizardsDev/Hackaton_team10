@@ -33,7 +33,7 @@ public class ServerConfig {
         ctx.addApplicationListener(WsContextListener.class.getName());
 
         tomcat.addServlet(ctx, "UsersHandler", HandlerConfig.getUsersHandler());
-        ctx.addServletMappingDecoded("/user/*", "UsersHandler");
+        ctx.addServletMappingDecoded("/*", "UsersHandler");
 
         tomcat.addServlet(ctx, "TournamentHandler", HandlerConfig.getTournamentHandler());
         ctx.addServletMappingDecoded("/tournament/*", "TournamentHandler");

@@ -14,6 +14,12 @@ public class UserController implements IUserController {
 
     private final IUserRepository userRepository;
 
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
     public UserController(IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -27,7 +33,7 @@ public class UserController implements IUserController {
                     System.currentTimeMillis(),
                     System.currentTimeMillis() + 18000
             );
-
+            this.role = user.getRole();
             return Optional.ofNullable(TokenProvider.encode(token));
         });
     }

@@ -10,4 +10,6 @@ public interface IUserController {
     Optional<String> authorize(UserAuthorizationDto userAuthDto);
 
     void register(UserRegistrationDto userRegDto);
+
+    String getRole();
 }

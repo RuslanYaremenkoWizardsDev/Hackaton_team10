@@ -46,6 +46,7 @@ export const regInit = () => {
       validateLogin(login.value) &&
       validatePassword(password.value) &&
       compare(password.value, confirm.value, errorText);
+      console.log(valid);
     if (valid) {
       const bodyObject = {
         login: login.value,

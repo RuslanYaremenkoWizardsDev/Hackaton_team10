@@ -14,7 +14,7 @@ describe("renderError", function () {
   it("should with valid path", function () {
     const path = "testPath.html";
     delete window.location;
-    window.location = {pathname: 'kek'};
+    window.location = {pathname: 'oldpath.html'};
     redirect(path);
     expect(window.location.pathname).toBe(path);
   });

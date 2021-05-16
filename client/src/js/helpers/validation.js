@@ -16,7 +16,9 @@ export const validatePassword = (password) => {
 };
 
 export const compare = (left, right, node) => {
-  if (!left || !right || !node) return false;
+  if (left === undefined || right === undefined || !node) {
+    return false;
+  }
   if (left === right) {
     return true;
   }

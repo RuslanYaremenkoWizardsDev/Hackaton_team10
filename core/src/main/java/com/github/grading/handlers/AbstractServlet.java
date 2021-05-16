@@ -1,5 +1,6 @@
 package com.github.grading.handlers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.grading.exceptions.BadRequest;
 import com.github.grading.exceptions.NotFound;
 import com.github.grading.utils.JsonHelper;
@@ -23,10 +24,11 @@ public class AbstractServlet extends HttpServlet {
     public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("SERVICE");
         try {
-            if (!req.getHeader("Content-Type").contains("application/json")) {
+            if (req.getHeader("Content-Type") != null && !req.getHeader("Content-Type").contains("application/json")) {
                 resp.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE, "Invalid content type");
                 return;
             }
+            setDefaultHeaders(resp);
             super.service(req, resp);
         } catch (BadRequest e) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid body.");
@@ -38,7 +40,6 @@ public class AbstractServlet extends HttpServlet {
     @Override
     public void doOptions(HttpServletRequest req, HttpServletResponse resp) {
         System.out.println("DO OPTIONS");
-        setDefaultHeaders(resp);
         resp.setStatus(204);
     }
 
@@ -50,10 +51,10 @@ public class AbstractServlet extends HttpServlet {
         resp.setStatus(HttpServletResponse.SC_ACCEPTED);
     }
 
-    protected void sendResponse(HttpServletResponse resp, String result) throws IOException {
+    protected void sendResponse(HttpServletResponse resp, Object result) throws IOException {
         ServletOutputStream out = resp.getOutputStream();
 
-        out.write(result.getBytes());
+        out.write(new ObjectMapper().writeValueAsString(result).getBytes());
         out.flush();
         out.close();
     }

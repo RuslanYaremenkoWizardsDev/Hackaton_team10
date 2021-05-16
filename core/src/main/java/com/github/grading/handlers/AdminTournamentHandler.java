@@ -5,7 +5,7 @@ import com.github.grading.controller.IAdminTournamentController;
 import javax.servlet.annotation.WebServlet;
 
 @WebServlet("/admin/tournament")
-public class AdminTournamentHandler {
+public class AdminTournamentHandler extends AbstractServlet {
 
     private final IAdminTournamentController controller;
 

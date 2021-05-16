@@ -4,7 +4,9 @@ import com.github.grading.controller.IUserController;
 import com.github.grading.dto.UserAuthorizationDto;
 import com.github.grading.dto.UserRegistrationDto;
 import com.github.grading.exceptions.BadRequest;
+import com.github.grading.exceptions.NotFound;
 
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +25,6 @@ public class UsersHandler extends AbstractServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("DO POST");
-        setDefaultHeaders(resp);
 
         String url = req.getRequestURI();
 

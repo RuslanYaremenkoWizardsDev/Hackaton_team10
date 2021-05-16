@@ -27,11 +27,26 @@ public class ServerConfig {
         if (webPort == null || webPort.isEmpty()) {
             webPort = "8080"; //TODO - make 5432
         }
+
         tomcat.setPort(Integer.parseInt(webPort));
-        Context ctx = tomcat.addWebapp("/login", new File(".").getAbsolutePath());
+        Context ctx = tomcat.addWebapp("/", new File(".").getAbsolutePath());
         ctx.addApplicationListener(WsContextListener.class.getName());
-        tomcat.addServlet(ctx, "UsersHandlers", AppConfig.getUsersHandler());
-        ctx.addServletMappingDecoded("/*", "UsersHandlers");
+
+        tomcat.addServlet(ctx, "UsersHandler", HandlerConfig.getUsersHandler());
+        ctx.addServletMappingDecoded("/user/*", "UsersHandler");
+
+        tomcat.addServlet(ctx, "TournamentHandler", HandlerConfig.getTournamentHandler());
+        ctx.addServletMappingDecoded("/tournament/*", "TournamentHandler");
+
+        tomcat.addServlet(ctx, "GameHandler", HandlerConfig.getGameHandler());
+        ctx.addServletMappingDecoded("/game/*", "GameHandler");
+
+        tomcat.addServlet(ctx, "AdminGameHandler", HandlerConfig.getAdminGameHandler());
+        ctx.addServletMappingDecoded("/admin/tournament/*/game/*", "AdminGameHandler");
+
+        tomcat.addServlet(ctx, "AdminTournamentHandler", HandlerConfig.getAdminTournamentHandler());
+        ctx.addServletMappingDecoded("/admin/tournament/*", "AdminTournamentHandler");
+
         return new ServerRunner(tomcat, ctx, List.of(chatWebsocketHandler));
     }
 

@@ -15,10 +15,6 @@ public class AppConfig {
 
     private static WebsocketHandler websocketHandler = new WebsocketHandler(getWebsocketConnectionPool(), getBroker());
 
-    public static UsersHandler getUsersHandler() {
-        return usersHandler;
-    }
-
     public static WebsocketHandler getWebsocketHandler() {
         return websocketHandler;
     }

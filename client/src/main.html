@@ -13,43 +13,39 @@
 
 <body>
     <header class="header">
-
-        <img class="header__logo" src="./img/logo.svg" alt="logo">
-        <a class="header__link" href="main.html"></a>
-        </img>
-        <nav class="header__nav">
-            <button class="header__nav-btn header__nav-btn--logout">
+        <a class="header__link" href="main.html"><img class="header__logo" src="./img/logo.svg" alt="logo" /></a>
+        <nav class="header__nav" id="nav">
+            <div class="header__nav-btn header__nav-btn--logout">
                 <a class="header__nav-link" href="#">
-                    <img class="header__nav-img" src="./img/setting.svg" alt="log out">
+                    <img class="header__nav-img" src="./img/setting.svg" alt="log out" />
                 </a>
-            </button>
-            <button class="header__nav-btn header__nav-btn--setting">
-                <img class="header__nav-img" src="./img/log-out.svg" alt="log out">
-                <a class="header__nav-link" href="#"></a>
-            </button>
+            </div>
+            <div class="header__nav-btn header__nav-btn--setting">
+                <a class="header__nav-link" href="#"><img class="header__nav-img" src="./img/log-out.svg"
+                        alt="log out" /></a>
+            </div>
         </nav>
     </header>
     <main class="main">
         <section class="main-page">
             <div class="container">
                 <div class="tabs" id="admin-tabs">
-                    <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked>
-                    <label for="tab-btn-1">Tournaments</label>
-                    <input type="radio" name="tab-btn" id="tab-btn-2" value="">
-                    <label for="tab-btn-2">Create tournament</label>
-                    <input type="radio" name="tab-btn" id="tab-btn-3" value="">
-                    <label for="tab-btn-3">Stats</label>
+                    <input class="tabs__input tabs--hide" type="radio" name="tab-btn" id="tab-btn-1" value="" checked>
+                    <label class="tabs__label tabs--hide" for="tab-btn-1">Tournaments</label>
+                    <input class="tabs__input tabs--hide" type="radio" name="tab-btn" id="tab-btn-2" value="">
+                    <label class="tabs__label tabs--hide" for="tab-btn-2">Create tournament</label>
+                    <input class="tabs__input tabs--hide" type="radio" name="tab-btn" id="tab-btn-3" value="">
+                    <label class="tabs__label tabs--hide" for="tab-btn-3">Stats</label>
                     <div id="tournaments">
                         <div class="filters-group">
                             <label for="filter-start-date"></label>
                             <input class="filters-group__input" id="filter-start-date" type="text"
                                 onfocusin="(this.type='date')" onfocusout="(this.type='text')" name="start-date"
-                                class="form-control" placeholder="Search by start date required
-                                pattern=" [0-9]{4}-[0-9]{2}-[0-9]{2}" />
+                                placeholder="Search by start date" />
                             <label for="filter-reg-date"></label>
                             <input class="filters-group__input" id="filter-reg-date" type="text"
                                 onfocusin="(this.type='date')" onfocusout="(this.type='text')" name="reg-date"
-                                placeholder="Search by reg date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" />
+                                placeholder="Search by reg date" />
                             <select class="filters-group__input" name="file" id="state">
                                 <option class="filters-group__option option-select" value="Search by state" selected>
                                     Search by state
@@ -103,14 +99,86 @@
                         </div>
                     </div>
                     <div id="create-tournaments">
+                        <div class="backdrop is-hidden" id="modal">
+                            <div class="modal" id="modal-content">
+                                <button class="modal__elips-btn" id="btn-close">
+                                </button>
+                                <h2 class="modal__title">
+                                    CREATE NEW QUESTION</h2>
+                                <h3 class="form__name">Select question theme</h3>
+                                <div class="modal__dropdown">
+                                    <button class="modal__dropdown-btn"></button>
+                                    <form class="form" action="#" method="POST" autocomplete="off" name="modalForm">
+                                        <select class="modal__dropdown-select" name="modal-theme" id="modal-theme">
+                                            <option class="modal__dropdown-option" value="JavaScript">JavaScript
+                                            </option>
+                                            <option class="modal__dropdown-option" value="HTML">HTML</option>
+                                            <option class="modal__dropdown-option" value="CSS">CSS</option>
+                                            <option class="modal__dropdown-option" value="DOM">DOM</option>
+                                            <option class="modal__dropdown-option" value="Node js">Node js</option>
+                                        </select>
+                                        <h3 class="form__name">Select file system</h3>
+                                        <ul class="format-list">
+                                            <li>CSV</li>
+                                            <li>JSON</li>
+                                            <li>XML</li>
+                                            <li>YAML</li>
+                                        </ul>
+                                        <div class="form-group">
+                                            <label class="form">
+                                                <input class="form__input form-checkbox" type="checkbox" value="CSV"
+                                                    name="input-file">
+                                            </label>
+                                            <label class="form">
+                                                <input class="form__input form-checkbox" type="checkbox" value="JSON"
+                                                    name="input-file">
+                                            </label>
+                                            <label class="form">
+                                                <input class="form__input form-checkbox" type="checkbox" value="XML"
+                                                    name="input-file">
+                                            </label>
+                                            <label class="form">
+                                                <input class="form__input form-checkbox" type="checkbox" value="YAML"
+                                                    name="input-file">
+                                            </label>
+                                        </div>
+                                        <!-- radio- button -->
+                                        <h3 class="form__name">Answer</h3>
+                                        <div class="form-checkboxes">
+                                            <label class="form">
+                                                <span class="radio-text">True</span>
+                                            </label>
+                                            <input class="form__input" value="true" type="radio" name="radio">
+                                            <label class="form">
+                                                <span class="radio-text">False</span>
+                                            </label>
+                                            <input class="form__input" value="false" type="radio" name="radio">
+                                        </div>
+                                        <!-- comment -->
+                                        <span class="form__name">Write question<span class="form__error"
+                                                id="error-text"></span></span>
+                                        <label class="form-container">
+                                        </label>
+                                        <div class="btn-container">
+                                            <button class="form__button form__button--create" type="submit"
+                                                id="btn-submit">Create</button>
+                                            <button class="form__button form__button--cancel" id="btn-cancel"><span
+                                                    class="underline">Cancel</span></button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- </form> -->
+                            </div>
+                        </div>
                     </div>
                     <div id="stats">
                     </div>
                 </div>
+                <!-- tabs -->
             </div>
-            </div>
-            </div>
+            <!-- container -->
         </section>
+        <!-- section -->
     </main>
 </body>
 

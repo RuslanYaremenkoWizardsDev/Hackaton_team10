@@ -7,16 +7,17 @@ const URLTOURNAMENTS =
   "https://my-json-server.typicode.com/mzubkova/db-json/invoices";
 
 export const MainInit = () => {
-  const container = document.querySelector("container");
   const selectParticipants = document.getElementById("participants");
   const selectStartDate = document.getElementById("filter-start-date");
   const selectState = document.getElementById("state");
+  const tabsInput = document.querySelectorAll(".tabs--hide");
+  const nav = document.getElementById("nav");
   let data = JSON.parse(localStorage.getItem("data"));
 
-  if (data.key === "admin") {
-    container.classList.add("tabs");
-  } else if (data.key === "guest" || data.key === "user") {
-    container.classList.add("tabs--hidden");
+  if (data !== "admin") {
+    for (let i = 0; i < tabsInput.length; i++) {
+      tabsInput[i].classList.add("hidden");
+    }
   }
 
   getRequest(URLTOURNAMENTS).then((data) => {

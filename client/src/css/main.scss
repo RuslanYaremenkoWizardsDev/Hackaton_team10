@@ -55,7 +55,7 @@
     height: 60px;
     background-color: $text-light-gray;
     text-align: center;
-    padding: 20px 0;
+    padding: 20px 5px;
     font-size: 1.6rem;
     color: $bg-purple;
     border: 1px solid $text-white;
@@ -84,8 +84,11 @@
 
   &__content {
     display: flex;
+    flex-direction: column;
     &-item {
+      display: flex;
       background-color: $bg-light-gray-2;
+      overflow: hidden;
     }
   }
 }

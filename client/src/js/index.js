@@ -3,7 +3,7 @@ import { validateLogin, validatePassword } from "./helpers/validation.js";
 import { postRequest, URL } from "./helpers/request.js";
 import { getCookie, killCookie, setCookie } from "./helpers/cookieHelper.js";
 import { redirect } from "./helpers/redirect.js";
-import { renderError } from "./helpers/render.js";
+import { renderError, renderText } from "./helpers/render.js";
 
 export const IndexInit = () => {
   //login nodes
@@ -30,6 +30,7 @@ export const IndexInit = () => {
         redirect("main.html");
       })
       .catch((e) => {
+        renderText(errorText, '');
         return renderError(
           errorText,
           "Server is not responding"
@@ -38,9 +39,11 @@ export const IndexInit = () => {
   });
   signButton.addEventListener("click", (event) => {
     event.preventDefault();
+    renderText(errorText, '');
     const valid =
       validateLogin(login.value) && validatePassword(password.value);
     if (valid) {
+
       const bodyObject = {
         login: login.value,
         password: password.value,
@@ -54,6 +57,7 @@ export const IndexInit = () => {
       const authURL = URL + "auth";
       postRequest(authURL, options)
         .then((data) => {
+          renderText(errorText, '');
           if (data.token) {
             setCookie("token", data.token);
             redirect("main.html");
@@ -68,6 +72,7 @@ export const IndexInit = () => {
           }
         })
         .catch((e) => {
+          renderText(errorText, '');
           return renderError(errorText, "Server is not responding");
         });
     } else {

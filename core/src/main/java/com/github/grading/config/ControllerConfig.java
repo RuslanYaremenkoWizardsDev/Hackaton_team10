@@ -8,7 +8,7 @@ public class ControllerConfig {
     private static final IAdminGameController adminGameController = new AdminGameController();
     private static final IAdminTournamentController adminTournamentController = new AdminTournamentController();
     private static final IGameController gameController = new GameController();
-    private static final ITournamentController tournamentController = new TournamentController();
+    private static final ITournamentController tournamentController = new TournamentController(ServiceConfig.getTournamentService());
     private static final IUserController userController = new UserController(RepositoryConfig.getUserRepository());
 
     public static IAdminGameController getAdminGameController() {

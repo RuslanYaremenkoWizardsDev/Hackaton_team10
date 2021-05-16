@@ -1,5 +1,5 @@
-export const setCookie = (name) => {
-  document.cookie = `${name}=${data.token}; max-age=3600`;
+export const setCookie = (name, data) => {
+  document.cookie = `${name}=${data}; max-age=3600`;
 };
 export const getCookie = (name) => {
   const value = `; ${document.cookie}`;

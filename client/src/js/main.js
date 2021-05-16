@@ -6,7 +6,11 @@ const URL = "https://my-json-server.typicode.com/mzubkova/db-json/invoices";
 let tournamentsContainer = document.getElementById("tournamentsContainer");
 // let tournamentsField = document.querySelector(".table__content-item");
 
-console.log(tournamentsContainer);
+
+
+
+
+
 getRequest(URL).then((data) => {
   console.log(data);
   renderAllTournaments(data);
@@ -22,8 +26,7 @@ function renderAllTournaments(data) {
     console.log("element", item);
     let content = document.createElement("div");
     content.classList.add("table__content-item");
-    tournamentsContainer.append(content);
-
+   
     let fieldName = document.createElement("p");
     fieldName.classList.add("table__content-item", "table__item");
     fieldName.textContent = item._id;
@@ -74,6 +77,8 @@ function renderAllTournaments(data) {
     content.append(fieldParticipants);
     content.append(fieldScenario);
     content.append(fieldActions);
+    tournamentsContainer.append(content);
+
   });
 }
 

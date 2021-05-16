@@ -8,6 +8,7 @@ import {
 import { postRequest, URL } from "./helpers/request.js";
 import { redirect } from "./helpers/redirect.js";
 import { renderError, renderText } from "./helpers/render.js";
+import { setLocalStorage } from "./helpers/localStorageOperations.js";
 
 export const regInit = () => {
   //login nodes
@@ -20,24 +21,8 @@ export const regInit = () => {
   const errorText = document.querySelector(".error-text");
 
   guestLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    const bodyObject = {
-      type: "guest",
-    };
-    const options = {
-      method: "POST",
-      body: JSON.stringify(bodyObject),
-    };
-    const authURL = URL + "auth";
-    postRequest(authURL, options)
-      .then((data) => {
-        setLocalStorage("role", data.role);
-        redirect("main.html");
-      })
-      .catch((e) => {
-        renderText(errorText, "");
-        return renderError(errorText, "Server is not responding");
-      });
+    setLocalStorage("role", "guest");
+    redirect("main.html");
   });
 
   signButton.addEventListener("click", (event) => {
@@ -52,7 +37,6 @@ export const regInit = () => {
         login: login.value,
         password: password.value,
         confirmPassword: confirm.value,
-        type: "registration",
       };
       const options = {
         method: "POST",
@@ -60,8 +44,7 @@ export const regInit = () => {
         body: JSON.stringify(bodyObject),
       };
 
-      const authURL = URL + "login";
-
+      const authURL = URL + "registration";
       renderText(errorText, "");
       postRequest(authURL, options)
         .then((data) => {

@@ -1,6 +1,7 @@
 @import "reset.scss";
 @import "variables.scss";
 @import "registration.scss";
+@import "form.scss";
 
 .main {
   &-page {
@@ -10,7 +11,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    padding-bottom: 150px;
+    padding: 30px 0 150px;
   }
 }
 
@@ -94,8 +95,8 @@
   }
 }
 
-.tabs {
-  margin-top: 30px;
+.hidden {
+  display: none !important;
 }
 
 .tabs > input[type="radio"] {
@@ -103,12 +104,19 @@
 }
 
 .tabs > input[type="radio"]:checked + label {
-  background-color: $text-pink;
+  background-color: $bg-purple;
+  color: $bg-light-gray-2;
 }
 
-#tab-btn-1:checked ~ #tournaments,
-#tab-btn-2:checked ~ #create-tournaments,
-#tab-btn-3:checked ~ #stats {
+.tabs > .content {
+  display: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+
+#tab-btn-1:checked ~ #content-1,
+#tab-btn-2:checked ~ #content-2,
+#tab-btn-3:checked ~ #content-3 {
   display: block;
 }
 
@@ -117,8 +125,7 @@
   text-align: center;
   vertical-align: middle;
   user-select: none;
-  background-color: $bg-purple;
-  border: 1px solid transparent;
+  background-color: $text-purple-light;
   padding: 2px 8px;
   font-size: 16px;
   line-height: 1.5;
@@ -134,6 +141,80 @@
   margin-left: 0;
 }
 
-.hidden {
-  display: none !important;
+#content-2 {
+  background-color: $bg-light-gray-2;
+  color: $bg-black;
+  font-size: 1.4rem;
+  font-family: $main-font;
+  text-align: center;
+}
+
+.content {
+  &__title {
+    margin: 10px 0 30px;
+    font-size: 2.4rem;
+  }
+}
+
+.custom-radio {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.custom-radio + label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+
+.custom-radio + label::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+.custom-radio:not(:disabled):not(:checked) + label:hover::before {
+  border-color: #b3d7ff;
+}
+
+.custom-radio:not(:disabled):active + label::before {
+  background-color: #b3d7ff;
+  border-color: #b3d7ff;
+}
+
+.custom-radio:focus + label::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.custom-radio:focus:not(:checked) + label::before {
+  border-color: #80bdff;
+}
+
+.custom-radio:checked + label::before {
+  border-color: #0b76ef;
+  background-color: #0b76ef;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+.custom-radio:disabled + label::before {
+  background-color: #e9ecef;
+}
+
+.radio {
+  margin-bottom: 0.4em;
+}
+
+.btn-container {
+  width: 300px;
+  margin: 30px auto;
 }

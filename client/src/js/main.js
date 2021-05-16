@@ -11,7 +11,6 @@ export const MainInit = () => {
   const selectState = document.getElementById("state");
   const tabsInput = document.querySelectorAll(".tabs--hide");
   const nav = document.getElementById("nav");
-
   checkRoles(tabsInput, nav);
   
   getRequest(URL+'tournament').then((data) => {
@@ -50,9 +49,9 @@ export const MainInit = () => {
       console.log("value_____", value);
       let date = new Date(value);
       let newDate = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
-      console.log("newDate", newDate);
+      // console.log("newDate", newDate);
       el.date_created === newDate;
-      console.log("el.date_created", el.date_created);
+      // console.log("el.date_created", el.date_created);
     });
     const table = document.querySelector("#tournamentsContainer");
     table.innerHTML = "";

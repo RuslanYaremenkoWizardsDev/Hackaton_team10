@@ -1,5 +1,6 @@
 package com.github.grading.handlers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.grading.controller.IGameController;
 import com.github.grading.controller.ITournamentController;
 import com.github.grading.controller.ITournamentInviteController;
@@ -7,6 +8,7 @@ import com.github.grading.controller.IUserController;
 import com.github.grading.dto.UserAuthorizationDto;
 import com.github.grading.dto.UserRegistrationDto;
 import com.github.grading.exceptions.BadRequest;
+import com.github.grading.payload.ResponseEnvelope;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -81,11 +83,19 @@ public class DefaultHandler extends AbstractServlet {
 
         if (url.endsWith("/auth")) {
             UserAuthorizationDto payload = parseRequestBody(req, UserAuthorizationDto.class);
+            System.out.println("AUTH PAYLOAD");
+            System.out.println(payload.toString());
             String result = this.userControllers.authorize(payload).orElseThrow(BadRequest::new);
-            sendResponse(resp, result);
+            ObjectMapper mapper = new ObjectMapper();
+            String str = mapper.writeValueAsString(new ResponseEnvelope(result, userControllers.getRole()));
+            System.out.println(str + " " + "JSON TOKEN");
+            sendResponse(resp, str);
         } else if (url.endsWith("/registration")) {
             UserRegistrationDto payload = parseRequestBody(req, UserRegistrationDto.class);
+            System.out.println("OUT PAYLOAD");
+            System.out.println(payload);
             this.userControllers.register(payload);
+            System.out.println("AFTER SET PAYLOAD");
         } else {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }

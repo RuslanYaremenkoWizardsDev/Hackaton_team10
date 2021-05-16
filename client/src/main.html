@@ -13,10 +13,70 @@
 
 <body>
     <header class="header">
-        <img src="./img/logo.svg" class="header__logo hide">
-        <a href="main.html"></a>
+
+        <img class="header__logo" src="./img/logo.svg" alt="logo">
+        <a class="header__link" href="main.html"></a>
         </img>
+        <nav class="header__nav">
+            <button class="header__nav-btn header__nav-btn--setting">
+                <img class="header__nav-img" src="./img/log-out.svg" alt="log out">
+                <a class="header__nav-link" href="#"></a>
+            </button>
+            <button class="header__nav-btn header__nav-btn--logout">
+                <a class="header__nav-link" href="#">
+                    <img class="header__nav-img" src="./img/setting.svg" alt="log out">
+                </a>
+            </button>
+        </nav>
     </header>
+    <main class="main">
+        <section class="main-page">
+            <div class="container">
+                <div class="tabs">
+                    <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked>
+                    <label for="tab-btn-1">Tournaments</label>
+                    <input type="radio" name="tab-btn" id="tab-btn-2" value="">
+                    <label for="tab-btn-2">Create tournament</label>
+                    <input type="radio" name="tab-btn" id="tab-btn-3" value="">
+                    <label for="tab-btn-3">Stats</label>
+                    <div id="tournaments">
+                        <div class="filters-group">
+                            <input class="filters-group__input" type="text" id="filter-start-date"
+                                placeholder="Search by start date">
+                            <input class="filters-group__input" type="text" id="filter-reg-date"
+                                placeholder="Search by reg date">
+                            <input class="filters-group__input" type="text" id="state" placeholder="Search by state">
+                            <button class="filters-group__button" id="clear-btn">Clear all</button>
+                        </div>
+                        <div class="table" id="table-tournaments">
+                            <div class="table__header">
+                                <div class="table__item">
+                                    Name
+                                </div>
+                                <div class="table__item">Mode</div>
+                                <div class="table__item">Place</div>
+                                <div class="table__item">Start date</div>
+                                <div class="table__item">Last reg date</div>
+                                <div class="table__item">State</div>
+                                <div class="table__item">Level</div>
+                                <div class="table__item">Participants</div>
+                                <div class="table__item">Scenario</div>
+                                <div class="table__item">Actions</div>
+                            </div>
+                            <div class="table__content" id="tournamentsContainer">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="create-tournaments">
+                    </div>
+                    <div id="stats">
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+        </section>
+    </main>
 </body>
 
 </html>

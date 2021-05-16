@@ -1,20 +1,6 @@
 @import "reset.scss";
 @import "variables.scss";
-
-.header {
-  align-items: center;
-  padding: 15px;
-  display: flex;
-  margin: 0 auto;
-  width: 1178px;
-  border-bottom: 2px solid $text-light-gray;
-  height: 100px;
-
-  &__logo {
-    width: 125px;
-    height: 75px;
-  }
-}
+@import "header.scss";
 
 .inner {
   align-content: center;

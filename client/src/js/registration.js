@@ -28,10 +28,8 @@ export const regInit = () => {
   signButton.addEventListener("click", (event) => {
     event.preventDefault();
     renderText(errorText, "");
-    const valid =
-      validateLogin(login.value) &&
-      validatePassword(password.value) &&
-      compare(password.value, confirm.value, errorText);
+    const valid = validateLogin(login.value) &&  validatePassword(password.value) && compare(password.value, confirm.value, errorText);
+      console.log('valid' ,valid);
     if (valid) {
       const bodyObject = {
         login: login.value,

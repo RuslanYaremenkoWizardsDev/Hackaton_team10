@@ -2,7 +2,6 @@
 @import "variables.scss";
 @import "registration.scss";
 
-
 .main {
   &-page {
     align-content: center;
@@ -19,6 +18,11 @@
   margin: 0 auto;
   max-width: 1170px;
   width: 100%;
+  display: inline-block;
+
+  &--hidden {
+    display: none;
+  }
 }
 
 .filters-group {

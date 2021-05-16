@@ -71,7 +71,7 @@ export const regInit = () => {
         renderText(errorText, "");
         return renderError(
           errorText,
-          "login length must be more then 3 symbols and less 25 symbols. Only latin characters and numberic in it"
+          "login length must be more then 3 symbols and less 25 symbols. Only latin characters and numeric in it"
         );
       }
       if (!passValid) {

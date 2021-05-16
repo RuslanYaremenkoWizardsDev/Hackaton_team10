@@ -1,7 +1,8 @@
-export const URL = `http://localhost:8080/`;
+export const URL = `https://web-application-grading.herokuapp.com/`;
 
-export const getRequest = async (url, options) => {
+export const getRequest = async (url, options={method: 'GET'}) => {
   const answer = await fetch(url, options);
+  console.log(answer);
   return answer.json();
 };
 export const postRequest = async (url, options) => {

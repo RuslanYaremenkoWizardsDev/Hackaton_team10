@@ -11,7 +11,6 @@ export const validateLogin = (login) => {
 export const validatePassword = (password) => {
   if (!password) return false;
   const reg = new RegExp(/^[a-z0-9_-]{6,25}$/, "i");
-  console.log('reg', !reg.test(password));
   if (!reg.test(password)) {
     return false;
   }
@@ -21,8 +20,9 @@ export const validatePassword = (password) => {
 export const compare = (left, right, node) => {
   const validLeft = validatePassword(left);
   const validRight  = validatePassword(right);
-  console.log('validLeft', validLeft);
-  console.log('validRight', validRight);
+  if(validLeft === false || validRight === false){
+    return false;
+  }
   if (left === undefined || right === undefined || !node) {
     return false;
   }
@@ -30,7 +30,6 @@ export const compare = (left, right, node) => {
     renderError(node, "password does not match");
     return false;
   }
-  console.log('lr', left, right)
   return true;
 
 };

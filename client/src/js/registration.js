@@ -42,12 +42,12 @@ export const regInit = () => {
         body: JSON.stringify(bodyObject),
       };
 
-      const authURL = URL + "registration";
+      const authURL = URL + "user/registration";
       renderText(errorText, "");
       postRequest(authURL, options)
         .then((data) => {
-          console.log(data);
-          if (data.status === 200) {
+          console.log(data.status);
+          if (data.status === 202) {
             redirect("index.html");
           } else {
             if (data.status === 401) {

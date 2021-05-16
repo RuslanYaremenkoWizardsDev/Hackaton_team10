@@ -1,6 +1,5 @@
 import "../css/main.scss";
 import { renderAllTournaments } from "./helpers/getTournaments.js";
-import { filterTournaments } from "./helpers/filterTournaments.js";
 import { getRequest, URL } from "./helpers/request.js";
 import { checkRoles } from "./helpers/checkRoles.js";
 
@@ -14,9 +13,7 @@ export const MainInit = () => {
   const nav = document.getElementById("nav");
 
   checkRoles(tabsInput, nav);
-
   
- 
   getRequest(URL+'tournament').then((data) => {
     console.log(data);
     renderAllTournaments(data);

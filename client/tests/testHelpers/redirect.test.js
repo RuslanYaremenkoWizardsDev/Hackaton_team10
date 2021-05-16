@@ -8,9 +8,6 @@ describe("renderError", function () {
   it("should be function", function () {
     expect(typeof redirect).toBe("function");
   });
-  it("should be without arguments", function () {
-    expect(redirect()).toBe(false);
-  });
   it("should with valid path", function () {
     const path = "testPath.html";
     delete window.location;

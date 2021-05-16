@@ -2,13 +2,13 @@ package com.github.grading.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+// TODO: use this @Table... when use heroku database
 //@Table(name = "user", schema = "public", catalog = "d3dhbnnbhpdelm")
 @Table(name = "user", schema = "public")
 @Data
@@ -35,12 +35,16 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "age")
     private int age;
 
+    @Column(name = "city")
     private String city;
 
+    @Column(name = "hobby")
     private String hobby;
 
+    @Column(name = "role")
     private String role;
 
     @ToString.Exclude

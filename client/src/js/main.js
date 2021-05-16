@@ -1,3 +1,4 @@
+
 import "../css/main.scss";
 import { getRequest } from "./helpers/request.js";
 
@@ -75,3 +76,4 @@ function renderAllTournaments(data) {
     content.append(fieldActions);
   });
 }
+

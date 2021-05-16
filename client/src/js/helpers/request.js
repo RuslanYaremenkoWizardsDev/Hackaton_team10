@@ -1,4 +1,4 @@
-export const URL = `http://localhost:8085/`;
+export const URL = `http://localhost:8080/`;
 
 export const getRequest = async (url, options) => {
   const answer = await fetch(url, options);

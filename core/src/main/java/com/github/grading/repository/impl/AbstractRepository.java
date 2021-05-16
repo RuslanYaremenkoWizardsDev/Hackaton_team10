@@ -17,7 +17,7 @@ public abstract class AbstractRepository <T, K extends Serializable> implements 
 
     @Override
     public T save(T entity) {
-        getSession().persist(entity);
+        getSession().save(entity);
         return entity;
     }
 

@@ -19,10 +19,6 @@
   max-width: 1170px;
   width: 100%;
   display: inline-block;
-
-  &--hidden {
-    display: none;
-  }
 }
 
 .filters-group {
@@ -136,4 +132,8 @@
 
 .tabs > label:first-of-type {
   margin-left: 0;
+}
+
+.hidden {
+  display: none !important;
 }

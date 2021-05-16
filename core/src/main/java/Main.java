@@ -1,33 +1,26 @@
-import org.hibernate.HibernateException;
+import com.github.grading.entity.Player;
+import com.github.grading.repository.impl.PlayerRepository;
+import com.github.grading.repository.impl.UserRepository;
 import org.hibernate.Metamodel;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import javax.persistence.metamodel.EntityType;
 
-import java.util.Map;
+import java.util.List;
+
+import static com.github.grading.utils.HibernateSessionFactoryUtil.getSession;
 
 public class Main {
-    private static final SessionFactory ourSessionFactory;
-
-    static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            ourSessionFactory = configuration.buildSessionFactory();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
 
     public static void main(final String[] args) throws Exception {
+        PlayerRepository playerRepository = new PlayerRepository();
+        List<Player> all = playerRepository.findAll();
+        System.out.println(all);
+
+        UserRepository userRepository = new UserRepository();
+        userRepository.findByLogin("1").ifPresent(System.out::println);
+
         final Session session = getSession();
         try {
             System.out.println("querying all the managed entities...");

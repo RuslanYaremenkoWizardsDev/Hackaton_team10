@@ -48,10 +48,6 @@ public class User {
     @Column(name = "role")
     private String role;
 
-//    @ToString.Exclude
-//    @OneToMany(mappedBy = "user")
-//    private List<Player> players;
-
     public User(String login, String password) {
         this.login = login;
         this.password = password;

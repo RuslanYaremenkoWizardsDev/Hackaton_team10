@@ -49,4 +49,16 @@ public class AbstractRepositoryTest {
         assertTrue(user instanceof HibernateProxy);
     }
 
+    @Test
+    public void givenHibernateInterceptorAndSessionFactoryScoped() {
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        User user = session.load(User.class, 13L);
+        if(user != null) {
+            session.update(user);
+        }
+        transaction.commit();
+        session.close();
+    }
+
 }

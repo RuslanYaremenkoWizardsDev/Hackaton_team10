@@ -40,12 +40,8 @@ public class HibernateSessionFactoryUtil {
                 configuration.addAnnotatedClass(Game.class);
                 configuration.addAnnotatedClass(Player.class);
                 configuration.addAnnotatedClass(Tournament.class);
-//                for (Class cls : getEntityClassesFromPackage("com.github.grading.entity")) {
-//                    configuration.addAnnotatedClass(cls);
-//                }
-//                StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            }catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 throw new RuntimeException("There is issue in hibernate util");
             }

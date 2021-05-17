@@ -25,13 +25,6 @@ public class JsonHelperTest {
         Assert.assertEquals(tokenStr, act);
     }
 
-    @Test(expected = JsonProcessingException.class)
-    public void fromJsonEmpty() {
-        Optional<String> result = JsonHelper.toJson(null);
-        result.orElseThrow();
-    }
-
-
     @Test
     public void fromJson() {
         Optional<Token> result = JsonHelper.fromJson(tokenStr,Token.class);

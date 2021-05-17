@@ -1,11 +1,15 @@
 import "../css/main.scss";
+<<<<<<< HEAD
 import { renderAllTournaments } from "./helpers/render.js";
 import { getRequest, URL , postRequest} from "./helpers/request.js";
+=======
+import { renderAllTournaments } from "./helpers/getTournaments.js";
+import { createTournament } from "./helpers/createTournament.js";
+import { getRequest, postRequest, URL } from "./helpers/request.js";
+>>>>>>> 74ccf53041031a01c880a67f429e9ede5172dfb2
 import { checkRoles } from "./helpers/checkRoles.js";
 
-
 export const MainInit = () => {
-
   const selectParticipants = document.getElementById("participants");
   const selectStartDate = document.getElementById("filter-start-date");
   const selectState = document.getElementById("state");
@@ -13,7 +17,12 @@ export const MainInit = () => {
   const nav = document.getElementById("nav");
 
   checkRoles(tabsInput, nav);
+<<<<<<< HEAD
   getRequest(URL+'tournament').then((data) => {
+=======
+
+  getRequest(URL + "tournament").then((data) => {
+>>>>>>> 74ccf53041031a01c880a67f429e9ede5172dfb2
     console.log(data);
     renderAllTournaments(data);
     localStorage.setItem("data", JSON.stringify(data));
@@ -22,6 +31,12 @@ export const MainInit = () => {
 
     console.log(data);
   })
+
+  postRequest(URL + "admin/tournament").then((data) => {
+    console.log(data);
+    createTournament(data);
+    // localStorage.setItem("data", JSON.stringify(data));
+  });
 
   selectState.addEventListener("change", (e) => {
     let data = JSON.parse(localStorage.getItem("data"));
@@ -63,4 +78,5 @@ export const MainInit = () => {
   });
 };
 
+createTournament();
 MainInit();

@@ -36,69 +36,65 @@
                     <label class="tabs__input tabs--hide" for="tab-btn-2">Create tournament</label>
                     <input class="tabs__input tabs--hide" type="radio" name="tab-btn" id="tab-btn-3">
                     <label class="tabs__input tabs--hide" for="tab-btn-3">Stats</label>
-
                     <div class="content" id="content-1">
-                        <div>
-                            <div class="filters-group">
-                                <label for="filter-start-date"></label>
-                                <input class="filters-group__input" id="filter-start-date" type="text"
-                                    onfocusin="(this.type='date')" onfocusout="(this.type='text')" name="start-date"
-                                    placeholder="Search by start date" />
-                                <label for="filter-reg-date"></label>
-                                <input class="filters-group__input" id="filter-reg-date" type="text"
-                                    onfocusin="(this.type='date')" onfocusout="(this.type='text')" name="reg-date"
-                                    placeholder="Search by reg date" />
-                                <select class="filters-group__input" name="file" id="state">
-                                    <option class="filters-group__option option-select" value="Search by state"
-                                        selected>
-                                        Search by state
-                                    </option>
-                                    <option class="filters-group__option option-select" value="all">
-                                        all
-                                    </option>
-                                    <option class="filters-group__option option-select" value="in progress">
-                                        in progress
-                                    </option>
-                                    <option class="filters-group__option option-select" value="registration">
-                                        registration
-                                    </option>
-                                </select>
-                                <select class="filters-group__input" name="file" id="participants">
-                                    <option class="filters-group__option option-select" value="Select by participants"
-                                        selected>
-                                        Select by participants
-                                    </option>
-                                    <option class="filters-group__option option-select" value="all">
-                                        all
-                                    </option>
-                                    <option class="filters-group__option option-select" value="63805">
-                                        63805
-                                    </option>
-                                    <option class="filters-group__option option-select" value="8">8</option>
-                                    <option class="filters-group__option option-select" value="16">16</option>
-                                    <option class="filters-group__option option-select" value="32">32</option>
-                                    <option class="filters-group__option option-select" value="64">64</option>
-                                    <option class="filters-group__option option-select" value="128">128</option>
-                                </select>
-                                <button class="filters-group__button" id="clear-btn">Clear all</button>
+                        <div class="filters-group">
+                            <label for="filter-start-date"></label>
+                            <input class="filters-group__input" id="filter-start-date" type="text"
+                                onfocusin="(this.type='date')" onfocusout="(this.type='text')" name="start-date"
+                                placeholder="Search by start date" />
+                            <label for="filter-reg-date"></label>
+                            <input class="filters-group__input" id="filter-reg-date" type="text"
+                                onfocusin="(this.type='date')" onfocusout="(this.type='text')" name="reg-date"
+                                placeholder="Search by reg date" />
+                            <select class="filters-group__input" name="file" id="state">
+                                <option class="filters-group__option option-select" value="Search by state" selected>
+                                    Search by state
+                                </option>
+                                <option class="filters-group__option option-select" value="all">
+                                    all
+                                </option>
+                                <option class="filters-group__option option-select" value="in progress">
+                                    in progress
+                                </option>
+                                <option class="filters-group__option option-select" value="registration">
+                                    registration
+                                </option>
+                            </select>
+                            <select class="filters-group__input" name="file" id="participants">
+                                <option class="filters-group__option option-select" value="Select by participants"
+                                    selected>
+                                    Select by participants
+                                </option>
+                                <option class="filters-group__option option-select" value="all">
+                                    all
+                                </option>
+                                <option class="filters-group__option option-select" value="4">
+                                    4
+                                </option>
+                                <option class="filters-group__option option-select" value="8">8</option>
+                                <option class="filters-group__option option-select" value="16">16</option>
+                                <option class="filters-group__option option-select" value="32">32</option>
+                                <option class="filters-group__option option-select" value="64">64</option>
+                                <option class="filters-group__option option-select" value="128">128</option>
+                            </select>
+                            <button class="filters-group__button" id="clear-btn">Clear all</button>
+                        </div>
+                        <div class="table" id="table-tournaments">
+                            <div class="table__header">
+                                <div class="table__item">
+                                    Name
+                                </div>
+                                <div class="table__item">Mode</div>
+                                <div class="table__item">Place</div>
+                                <div class="table__item">Start date</div>
+                                <div class="table__item">Last reg date</div>
+                                <div class="table__item">State</div>
+                                <div class="table__item">Level</div>
+                                <div class="table__item">Participants</div>
+                                <div class="table__item">Scenario</div>
+                                <div class="table__item">Actions</div>
                             </div>
-                            <div class="table" id="table-tournaments">
-                                <div class="table__header">
-                                    <div class="table__item">
-                                        Name
-                                    </div>
-                                    <div class="table__item">Mode</div>
-                                    <div class="table__item">Place</div>
-                                    <div class="table__item">Start date</div>
-                                    <div class="table__item">Last reg date</div>
-                                    <div class="table__item">State</div>
-                                    <div class="table__item">Level</div>
-                                    <div class="table__item">Participants</div>
-                                    <div class="table__item">Scenario</div>
-                                    <div class="table__item">Actions</div>
-                                </div>
-                                <div class="table__content" id="tournamentsContainer">
-                                </div>
+                            <div class="table__content" id="tournamentsContainer">
                             </div>
                         </div>
                     </div>
@@ -212,8 +208,7 @@
                                 </div>
                             </div>
                             <!-- radio- button Scenario for participants -->
-
-                            <select class="modal__dropdown-select" name="modal-theme" id="modal-theme">
+                            <select class="modal__dropdown-select" name="invite-user" id="invite-user">
                                 <option class="modal__dropdown-option" value="User 1">User 1
                                 </option>
                                 <option class="modal__dropdown-option" value="User 2">User 2</option>
@@ -228,6 +223,7 @@
                                 <button class="form__button form__button--cancel" id="btn-cancel"><span
                                         class="underline">Cancel</span></button>
                             </div>
+                            <div id="form-error"></div>
                         </form>
                     </div>
                     <div class="content" id="content-3">

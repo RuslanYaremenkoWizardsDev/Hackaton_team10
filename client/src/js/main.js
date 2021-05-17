@@ -27,24 +27,16 @@ export const MainInit = () => {
   const tabsInput = document.querySelectorAll(".tabs--hide");
   const nav = document.getElementById("nav");
   const clearAll = document.getElementById("clear-btn");
-  checkRoles(tabsInput, nav);
-
-  // getRequest(
-  //   "https://my-json-server.typicode.com/mzubkova/db-json/invoices"
-  // ).then((data) => {
-  //   console.log(data);
-  //   renderAllTournaments(data);
-  //   localStorage.setItem("data", JSON.stringify(data));
-  // });
-
   const create = document.querySelector(".form__button--create");
- 
+
+  checkRoles(tabsInput, nav);
   checkRoles(tabsInput, nav);
   getRequest(URL + "tournament").then((data) => {
     console.log(data);
     renderAllTournaments(data);
     localStorage.setItem("data", JSON.stringify(data));
   });
+
   selectState.addEventListener("change", (e) => {
     let data = JSON.parse(localStorage.getItem("data"));
     if (e.target.value === "all") {
@@ -78,11 +70,7 @@ export const MainInit = () => {
       let newDate = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
       el.date_created === newDate;
     });
-    const table = document.querySelector("#tournamentsContainer");
-    table.innerHTML = "";
-    renderAllTournaments(data);
   });
-
   clearAll.addEventListener("click", (e) => {
     confirm("You want to delete invoice");
     onDeleteHandler;
@@ -95,19 +83,19 @@ export const MainInit = () => {
       console.log("id", id);
     }
 
-  create.addEventListener("click", (e)=>{
-    e.preventDefault();
-    const newTournament  = createTournament();
-    const options = {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(newTournament),
-    }
-    console.log(options.body);
-    postRequest(URL+'admin/tournament', options).then((data)=>{
-      console.log(data);
-    })
+    create.addEventListener("click", (e) => {
+      e.preventDefault();
+      const newTournament = createTournament();
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newTournament),
+      };
+      console.log(options.body);
+      postRequest(URL + "admin/tournament", options).then((data) => {
+        console.log(data);
+      });
+    });
   });
 };
-
 MainInit();

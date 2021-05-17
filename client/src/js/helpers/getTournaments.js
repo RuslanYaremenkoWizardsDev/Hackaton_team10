@@ -6,7 +6,6 @@ export const renderAllTournaments = (data) => {
   let tournamentsContainer = document.getElementById("tournamentsContainer");
 
   data.forEach((item) => {
-    console.log(item);
     let content = document.createElement("div");
     content.classList.add("table__content-item");
 

@@ -1,8 +1,7 @@
 import "../css/registration.scss";
-import { validateLogin, validatePassword } from "./helpers/validation.js";
 import { postRequest, URL } from "./helpers/request.js";
-import { getCookie, killCookie, setCookie } from "./helpers/cookieHelper.js";
-import { redirect } from "./helpers/redirect.js";
+import {setCookie } from "./helpers/cookieHelper.js";
+import { redirect } from "./helpers/general";
 import { renderError, renderText } from "./helpers/render.js";
 import { setLocalStorage } from "./helpers/localStorageOperations.js";
 

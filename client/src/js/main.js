@@ -1,31 +1,50 @@
 import "../css/main.scss";
-import { renderAllTournaments } from "./helpers/getTournaments.js";
-import { createTournament } from "./helpers/createTournament.js";
-import { getRequest, postRequest, URL } from "./helpers/request.js";
-import { checkRoles } from "./helpers/checkRoles.js";
+import { getRequest, postRequest, URL, putRequest } from "./helpers/request.js";
+import { checkRoles, redirect, hide, show } from "./helpers/general.js";
+import { compare } from "./helpers/validation.js";
+import {
+  renderAllTournaments,
+  cleaner,
+  changer,
+  createTournament,
+  renderError,
+} from "./helpers/render.js";
+import {
+  setLocalStorage,
+  getLocalStorage,
+} from "./helpers/localStorageOperations.js";
+import { killCookie } from "./helpers/cookieHelper.js";
 
 export const MainInit = () => {
   const selectParticipants = document.getElementById("participants");
   const selectStartDate = document.getElementById("filter-start-date");
+  const selectLastDate = document.querySelector("#filter-reg-date");
   const selectState = document.getElementById("state");
   const tabsInput = document.querySelectorAll(".tabs--hide");
   const nav = document.getElementById("nav");
+  const clearAll = document.getElementById("clear-btn");
   const create = document.querySelector(".form__button--create");
- 
+  const table = document.querySelector("#tournamentsContainer");
+  const logout = document.querySelector(".header__nav-btn--logout");
+  const settings = document.querySelector(".header__nav-img");
+  const settingsModal = document.querySelector(".settings__modal");
+  const exitModal = document.querySelector("#exit");
+  const changeLogin = document.querySelector("#changeLogin");
+  const changePassword = document.querySelector("#changePassword");
+
+  checkRoles(tabsInput, nav);
   checkRoles(tabsInput, nav);
   getRequest(URL + "tournament").then((data) => {
-    console.log(data);
     renderAllTournaments(data);
-    localStorage.setItem("data", JSON.stringify(data));
+    setLocalStorage("data", data);
   });
+
   selectState.addEventListener("change", (e) => {
-    let data = JSON.parse(localStorage.getItem("data"));
+    let data = getLocalStorage("data");
     if (e.target.value === "all") {
-      renderAllTournaments(data);
-      return false;
+      return renderAllTournaments(data);
     }
-    data = data.filter((el) => el.number === Number(e.target.value));
-    const table = document.querySelector("#tournamentsContainer");
+    data = data.filter((el) => el.status === e.target.value);
     table.innerHTML = "";
     renderAllTournaments(data);
   });
@@ -48,27 +67,70 @@ export const MainInit = () => {
       console.log("value_____", value);
       let date = new Date(value);
       let newDate = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
-      // console.log("newDate", newDate);
       el.date_created === newDate;
-      // console.log("el.date_created", el.date_created);
     });
-    const table = document.querySelector("#tournamentsContainer");
-    table.innerHTML = "";
-    renderAllTournaments(data);
   });
-  create.addEventListener("click", (e)=>{
+  clearAll.addEventListener("click", (e) => {
+    cleaner(selectStartDate);
+    cleaner(selectLastDate);
+    changer(selectState);
+    changer(selectParticipants);
+  });
+  create.addEventListener("click", (e) => {
     e.preventDefault();
-    const newTournament  = createTournament();
+    const newTournament = createTournament();
     const options = {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTournament),
-    }
+    };
     console.log(options.body);
-    postRequest(URL+'admin/tournament', options).then((data)=>{
-      console.log(data);
-    })
+    postRequest(URL + "admin/tournament", options).then((data) => {
+      if (data === "done")
+        getRequest(URL + "tournament").then((data) => {
+          renderAllTournaments(data);
+          setLocalStorage("data", data);
+        });
+    });
+  });
+  logout.addEventListener("click", (e) => {
+    killCookie("token");
+    setLocalStorage("data", "");
+    setLocalStorage("role", "");
+    redirect("index.html");
+  });
+  settings.addEventListener("click", (e) => show(settingsModal));
+  settingsModal.addEventListener("click", (e) => {
+    if (e.target.classList.contains("settings__modal")) hide(settingsModal);
+  });
+  exitModal.addEventListener("click", (e) => hide(settingsModal));
+  changeLogin.addEventListener("click", (e) => {
+    const ModalOldLogin = document.querySelector("#oldLogin");
+    const ModalNewLogin = document.querySelector("#newLogin");
+    const options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      cors: "no-cors",
+      body: JSON.stringify({
+        oldLogin: ModalOldLogin.value,
+        newLogin: ModalNewLogin.value,
+      }),
+    };
+    putRequest(URL + "user", options).then((data) => hide(settingsModal));
+  });
+  changePassword.addEventListener("click", (e) => {
+    const ModalOldPassword = document.querySelector("#oldPassword");
+    const ModalNewPassword = document.querySelector("#newPassword");
+    const options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      cors: "no-cors",
+      body: JSON.stringify({
+        oldLogin: ModalOldPassword.value,
+        newLogin: ModalNewPassword.value,
+      }),
+    };
+    putRequest(URL + "user", options).then((data) => hide(settingsModal));
   });
 };
-
 MainInit();

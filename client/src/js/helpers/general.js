@@ -8,7 +8,14 @@ export const checkRoles = (tabs, nav) => {
   if (role === "guest") {
     nav.classList.add("hidden");
     for (let i = 0; i < tabs.length; i++) {
-        tabs[i].classList.add("hidden");
+      tabs[i].classList.add("hidden");
     }
   }
 };
+
+export const redirect = (path) => {
+  window.location.pathname = path;
+};
+
+export const hide = node => node.classList.add('hidden');
+export const show = node => node.classList.remove('hidden');

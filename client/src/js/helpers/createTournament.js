@@ -12,7 +12,6 @@ export const createTournament = (e) => {
   const inputScenario = form.elements.match;
   const selectInvite = form.elements["invite-user"];
 
-  let error = document.getElementById("form-error");
 
   let nameValue = inputName.value;
   let modeValue = inputMode.value;
@@ -24,7 +23,7 @@ export const createTournament = (e) => {
   let participantsValue = inputParticipants.value;
   let scenarioValue = inputScenario.value;
   let inviteValue = selectInvite.value;
-
+  
   class Tournament {
     constructor(
       name,
@@ -46,8 +45,6 @@ export const createTournament = (e) => {
       this.levelOfTournament = levelOfTournament;
       this.numberOfParticipants = Number(numberOfParticipants);
       this.scenarioForTournament = scenarioForTournament;
-  /*     this.invitedPlayers = [];
-      this.game = []; */
     }
   }
 
@@ -65,18 +62,4 @@ export const createTournament = (e) => {
   );
 
   return tournament;
-
-  if (!/^[a-z0-9_-]{1,255}$/.test(descValue)) {
-    error.textContent = "Your message must be 255 characters or less!";
-    return;
-  }
-
-  // { "id": 1, "name": "Name 1", "description": "description 1", "mode": "CUP", "place": "place 1", "startDate": 1621185070000, "lastRegistrationDate": 1621185070000, "levelOfTournament": "BEGINNER", "numberOfParticipants": null, "scenarioForTournament": "ONE_MATCH_CONFRONTATION", "invitedPlayers": [], "games": [] }
-
-  // let listItem = listItemTemplate(question);
-  // listContainer.insertAdjacentElement("afterbegin", listItem);
-  // btnCreate.classList.remove("form__button--disabled");
-  // error.style.display = "none";
-  // btnCreate.disabled = false;
-  form.reset();
 };

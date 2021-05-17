@@ -24,7 +24,7 @@ export const createTournament = (e) => {
   let participantsValue = inputParticipants.value;
   let scenarioValue = inputScenario.value;
   let inviteValue = selectInvite.value;
-
+  
   class Tournament {
     constructor(
       name,

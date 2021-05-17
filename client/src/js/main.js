@@ -1,12 +1,7 @@
 import "../css/main.scss";
-<<<<<<< HEAD
-import { renderAllTournaments } from "./helpers/render.js";
-import { getRequest, URL , postRequest} from "./helpers/request.js";
-=======
 import { renderAllTournaments } from "./helpers/getTournaments.js";
 import { createTournament } from "./helpers/createTournament.js";
 import { getRequest, postRequest, URL } from "./helpers/request.js";
->>>>>>> 74ccf53041031a01c880a67f429e9ede5172dfb2
 import { checkRoles } from "./helpers/checkRoles.js";
 
 export const MainInit = () => {
@@ -15,29 +10,14 @@ export const MainInit = () => {
   const selectState = document.getElementById("state");
   const tabsInput = document.querySelectorAll(".tabs--hide");
   const nav = document.getElementById("nav");
-
+  const create = document.querySelector(".form__button--create");
+ 
   checkRoles(tabsInput, nav);
-<<<<<<< HEAD
-  getRequest(URL+'tournament').then((data) => {
-=======
-
   getRequest(URL + "tournament").then((data) => {
->>>>>>> 74ccf53041031a01c880a67f429e9ede5172dfb2
     console.log(data);
     renderAllTournaments(data);
     localStorage.setItem("data", JSON.stringify(data));
   });
-  postRequest(URL+'admin/tournament',{method: 'POST'}).then((data) => {
-
-    console.log(data);
-  })
-
-  postRequest(URL + "admin/tournament").then((data) => {
-    console.log(data);
-    createTournament(data);
-    // localStorage.setItem("data", JSON.stringify(data));
-  });
-
   selectState.addEventListener("change", (e) => {
     let data = JSON.parse(localStorage.getItem("data"));
     if (e.target.value === "all") {
@@ -76,7 +56,19 @@ export const MainInit = () => {
     table.innerHTML = "";
     renderAllTournaments(data);
   });
+  create.addEventListener("click", (e)=>{
+    e.preventDefault();
+    const newTournament  = createTournament();
+    const options = {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(newTournament),
+    }
+    console.log(options.body);
+    postRequest(URL+'admin/tournament', options).then((data)=>{
+      console.log(data);
+    })
+  });
 };
 
-createTournament();
 MainInit();

@@ -24,6 +24,7 @@ export const createTournament = (e) => {
   let participantsValue = inputParticipants.value;
   let scenarioValue = inputScenario.value;
   let inviteValue = selectInvite.value;
+  
   class Tournament {
     constructor(
       name,
@@ -39,14 +40,14 @@ export const createTournament = (e) => {
     ) {
       this.name = name;
       this.description = description;
-      this.mode = mode;
       this.place = place;
-      this.startDate = startDate;
-      this.lastRegistrationDate = lastRegistrationDate;
+      this.startDate = new Date(startDate).toUTCString();
+      this.lastRegistrationDate = new Date(lastRegistrationDate).toUTCString();
       this.levelOfTournament = levelOfTournament;
-      this.numberOfParticipants = numberOfParticipants;
+      this.numberOfParticipants = Number(numberOfParticipants);
       this.scenarioForTournament = scenarioForTournament;
-      this.invitedPlayers = invitedPlayers;
+  /*     this.invitedPlayers = [];
+      this.game = []; */
     }
   }
 
@@ -62,7 +63,6 @@ export const createTournament = (e) => {
     scenarioValue,
     inviteValue
   );
-  // console.log("tournament", tournament);
 
   return tournament;
 
@@ -80,10 +80,3 @@ export const createTournament = (e) => {
   // btnCreate.disabled = false;
   form.reset();
 };
-
-const create = document.querySelector(".form__button--create");
-create.addEventListener("click", createTournament);
-
-//   getRequest[newTournament.id] = newTournament;
-//   return Object.assign(newTournament);
-// }

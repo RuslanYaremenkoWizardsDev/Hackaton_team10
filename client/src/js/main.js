@@ -37,18 +37,14 @@ export const MainInit = () => {
   //   localStorage.setItem("data", JSON.stringify(data));
   // });
 
+  const create = document.querySelector(".form__button--create");
+ 
+  checkRoles(tabsInput, nav);
   getRequest(URL + "tournament").then((data) => {
     console.log(data);
     renderAllTournaments(data);
     localStorage.setItem("data", JSON.stringify(data));
   });
-
-  postRequest(URL + "admin/tournament").then((data) => {
-    console.log(data);
-    createTournament(data);
-    // localStorage.setItem("data", JSON.stringify(data));
-  });
-
   selectState.addEventListener("change", (e) => {
     let data = JSON.parse(localStorage.getItem("data"));
     if (e.target.value === "all") {
@@ -98,8 +94,20 @@ export const MainInit = () => {
       let id = data._id;
       console.log("id", id);
     }
+
+  create.addEventListener("click", (e)=>{
+    e.preventDefault();
+    const newTournament  = createTournament();
+    const options = {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(newTournament),
+    }
+    console.log(options.body);
+    postRequest(URL+'admin/tournament', options).then((data)=>{
+      console.log(data);
+    })
   });
 };
 
-createTournament();
 MainInit();

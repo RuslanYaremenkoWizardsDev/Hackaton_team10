@@ -33,6 +33,9 @@ public class DefaultHandler extends AbstractServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = req.getRequestURI();
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Methods", "*");
+        resp.setHeader("Access-Control-Allow-Headers", "*");
         String[] splitUrl = url.split("/");
 
         // GET		/user               (получить весь список пользователей)

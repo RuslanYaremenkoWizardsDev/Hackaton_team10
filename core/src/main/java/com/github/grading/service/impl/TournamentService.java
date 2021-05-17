@@ -3,6 +3,7 @@ package com.github.grading.service.impl;
 import com.github.grading.dto.CreateTournamentDto;
 import com.github.grading.dto.UpdateTournamentDto;
 import com.github.grading.entity.Tournament;
+import com.github.grading.entity.TournamentInvite;
 import com.github.grading.entity.TournamentMode;
 import com.github.grading.repository.ITournamentRepository;
 import com.github.grading.service.ITournamentService;
@@ -63,5 +64,55 @@ public class TournamentService implements ITournamentService {
     @Override
     public void delete(long id) {
         repository.delete(id);
+    }
+
+    @Override
+    public TournamentInvite save(TournamentInvite entity) {
+        return null;
+    }
+
+    @Override
+    public TournamentInvite getOne(Long id) {
+        return null;
+    }
+
+    @Override
+    public TournamentInvite findOne(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<TournamentInvite> findAll() {
+        return null;
+    }
+
+    @Override
+    public void update(TournamentInvite entity) {
+
+    }
+
+    @Override
+    public void delete(TournamentInvite entity) {
+
+    }
+
+    @Override
+    public void delete(Long id) {
+
+    }
+
+    @Override
+    public void deleteAll() {
+
+    }
+
+    @Override
+    public long count() {
+        return 0;
+    }
+
+    @Override
+    public boolean exists(Long id) {
+        return false;
     }
 }

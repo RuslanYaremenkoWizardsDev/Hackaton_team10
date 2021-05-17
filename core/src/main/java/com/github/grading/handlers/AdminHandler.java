@@ -21,7 +21,19 @@ public class AdminHandler extends AbstractServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Methods", "*");
+        resp.setHeader("Access-Control-Allow-Headers", "*");
         sendResponse(resp, controller.getAll());
+    }
+
+
+    @Override
+    public void doOptions(HttpServletRequest req, HttpServletResponse resp) {
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Methods", "*");
+        resp.setHeader("Access-Control-Allow-Headers", "*");
+        resp.setStatus(204);
     }
 
     @Override
@@ -41,6 +53,9 @@ public class AdminHandler extends AbstractServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = req.getRequestURI();
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Methods", "*");
+        resp.setHeader("Access-Control-Allow-Headers", "*");
         String[] splitUrl = url.split("/");
 
         // POST 	/admin/tournament 		(создать новый турнир)

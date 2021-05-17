@@ -6,7 +6,4 @@ export const getCookie = (name) => {
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(";").shift();
 };
-export const killCookie = () => {
-  window.document.cookie = "token=;max-age=0";
-  window.location.pathname = "index.html";
-};
+export const killCookie = (name) => { window.document.cookie = `${name}=;max-age=0`};

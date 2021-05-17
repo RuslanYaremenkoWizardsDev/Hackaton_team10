@@ -1,50 +1,35 @@
 import "../css/main.scss";
 import { getRequest, postRequest, URL } from "./helpers/request.js";
-import { renderAllTournaments } from "./helpers/getTournaments.js";
 import { createTournament } from "./helpers/createTournament.js";
-import { onDeleteHandler } from "./helpers/deleteTournament.js";
 import { checkRoles } from "./helpers/checkRoles.js";
-
-const json = {
-  id: 1,
-  name: "Name 1",
-  description: "description 1",
-  mode: "CUP",
-  place: "place 1",
-  startDate: 1621195870000,
-  lastRegistrationDate: 1621195870000,
-  levelOfTournament: "BEGINNER",
-  numberOfParticipants: null,
-  scenarioForTournament: "ONE_MATCH_CONFRONTATION",
-  invitedPlayers: [],
-  games: [],
-};
+import { renderAllTournaments, cleaner, changer } from "./helpers/render.js";
+import { setLocalStorage,getLocalStorage } from "./helpers/localStorageOperations.js";
+import {redirect} from './helpers/redirect.js'
+import {killCookie} from './helpers/cookieHelper.js'
 
 export const MainInit = () => {
   const selectParticipants = document.getElementById("participants");
   const selectStartDate = document.getElementById("filter-start-date");
+  const selectLastDate = document.querySelector("#filter-reg-date");
   const selectState = document.getElementById("state");
   const tabsInput = document.querySelectorAll(".tabs--hide");
   const nav = document.getElementById("nav");
   const clearAll = document.getElementById("clear-btn");
   const create = document.querySelector(".form__button--create");
+  const table = document.querySelector("#tournamentsContainer");
+  const logout = document.querySelector('.header__nav-btn--logout');
 
   checkRoles(tabsInput, nav);
   checkRoles(tabsInput, nav);
   getRequest(URL + "tournament").then((data) => {
-    console.log(data);
     renderAllTournaments(data);
-    localStorage.setItem("data", JSON.stringify(data));
+    setLocalStorage('data', data);
   });
 
   selectState.addEventListener("change", (e) => {
-    let data = JSON.parse(localStorage.getItem("data"));
-    if (e.target.value === "all") {
-      renderAllTournaments(data);
-      return false;
-    }
-    data = data.filter((el) => el.number === Number(e.target.value));
-    const table = document.querySelector("#tournamentsContainer");
+    let data = getLocalStorage('data');
+    if (e.target.value === "all") {return renderAllTournaments(data)}
+    data = data.filter((el) => el.status === e.target.value);
     table.innerHTML = "";
     renderAllTournaments(data);
   });
@@ -60,7 +45,6 @@ export const MainInit = () => {
     table.innerHTML = "";
     renderAllTournaments(data);
   });
-
   selectStartDate.addEventListener("change", (e) => {
     let data = JSON.parse(localStorage.getItem("data"));
     data = data.filter((el) => {
@@ -72,30 +56,32 @@ export const MainInit = () => {
     });
   });
   clearAll.addEventListener("click", (e) => {
-    confirm("You want to delete invoice");
-    onDeleteHandler;
-    console.log(clearAll);
-
-    if (clearAll.classList.contains("btn--remove")) {
-      let data = renderAllTournaments(data);
-      console.log("data", data);
-      let id = data._id;
-      console.log("id", id);
-    }
-
-    create.addEventListener("click", (e) => {
-      e.preventDefault();
-      const newTournament = createTournament();
-      const options = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newTournament),
-      };
-      console.log(options.body);
-      postRequest(URL + "admin/tournament", options).then((data) => {
-        console.log(data);
-      });
+    cleaner(selectStartDate);
+    cleaner(selectLastDate);
+    changer(selectState);
+    changer(selectParticipants);
+  });
+  create.addEventListener("click", (e) => {
+    e.preventDefault();
+    const newTournament = createTournament();
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newTournament),
+    };
+    postRequest(URL + "admin/tournament", options).then((data) => {
+      if (data === "done")
+        getRequest(URL + "tournament").then((data) => {
+          renderAllTournaments(data);
+          setLocalStorage('data', data);
+        });
     });
+  });
+  logout.addEventListener('click', (e) => {
+    killCookie('token');
+    setLocalStorage('data', '');
+    setLocalStorage('role', '');
+    redirect('index.html');
   });
 };
 MainInit();

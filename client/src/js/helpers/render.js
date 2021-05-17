@@ -71,3 +71,6 @@ export const renderAllTournaments = (data) => {
       tournamentsContainer.append(content);
     });
   };
+
+export const cleaner = (node) => node.value = '';
+export const changer = (select) => select.options[0].selected = true;

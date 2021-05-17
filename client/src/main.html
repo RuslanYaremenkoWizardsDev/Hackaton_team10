@@ -1,241 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,500;1,700&display=swap"
-        rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
     <title>Main</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="header">
-        <a class="header__link" href="main.html"><img class="header__logo" src="./img/logo.svg" alt="logo" /></a>
-        <nav class="header__nav" id="nav">
-            <div class="header__nav-btn header__nav-btn--logout">
-                <a class="header__nav-link" href="#modal">
-                    <img class="header__nav-img" src="./img/setting.svg" alt="log out" />
-                </a>
-            </div>
-            <div class="header__nav-btn header__nav-btn--setting">
-                <a class="header__nav-link" href="index.html"><img class="header__nav-img" src="./img/log-out.svg"
-                        alt="log out" /></a>
-            </div>
-        </nav>
+      <a class="header__link" href="main.html"
+        ><img class="header__logo" src="./img/logo.svg" alt="logo"
+      /></a>
+      <nav class="header__nav" id="nav">
+        <div class="header__nav-btn header__nav-btn--setting">
+          <a class="header__nav-link" href="#modal"
+            ><img class="header__nav-img" src="./img/setting.svg" alt="log out"
+          /></a>
+        </div>
+        <div class="header__nav-btn header__nav-btn--logout">
+          <a class="header__nav-link">
+            <img
+              class="header__nav-img"
+              src="./img/log-out.svg"
+              alt="log out"
+            />
+          </a>
+        </div>
+      </nav>
     </header>
     <main class="main">
-        <section class="main-page">
-            <div class="container">
-                <div class="tabs" id="admin-tabs">
-                    <input class="tabs__input tabs--hide" type="radio" name="tab-btn" id="tab-btn-1" checked>
-                    <label class="tabs__input tabs--hide" for="tab-btn-1">Tournaments</label>
-                    <input class="tabs__input tabs--hide" type="radio" name="tab-btn" id="tab-btn-2">
-                    <label class="tabs__input tabs--hide" for="tab-btn-2">Create tournament</label>
-                    <input class="tabs__input tabs--hide" type="radio" name="tab-btn" id="tab-btn-3">
-                    <label class="tabs__input tabs--hide" for="tab-btn-3">Stats</label>
-                    <div class="content" id="content-1">
-                        <div class="filters-group">
-                            <label for="filter-start-date"></label>
-                            <input class="filters-group__input" id="filter-start-date" type="text"
-                                onfocusin="(this.type='date')" onfocusout="(this.type='text')" name="start-date"
-                                placeholder="Search by start date" />
-                            <label for="filter-reg-date"></label>
-                            <input class="filters-group__input" id="filter-reg-date" type="text"
-                                onfocusin="(this.type='date')" onfocusout="(this.type='text')" name="reg-date"
-                                placeholder="Search by reg date" />
-                            <select class="filters-group__input" name="file" id="state">
-                                <option class="filters-group__option option-select" value="Search by state" selected>
-                                    Search by state
-                                </option>
-                                <option class="filters-group__option option-select" value="all">
-                                    all
-                                </option>
-                                <option class="filters-group__option option-select" value="in progress">
-                                    in progress
-                                </option>
-                                <option class="filters-group__option option-select" value="registration">
-                                    registration
-                                </option>
-                            </select>
-                            <select class="filters-group__input" name="file" id="participants">
-                                <option class="filters-group__option option-select" value="Select by participants"
-                                    selected>
-                                    Select by participants
-                                </option>
-                                <option class="filters-group__option option-select" value="all">
-                                    all
-                                </option>
-                                <option class="filters-group__option option-select" value="4">
-                                    4
-                                </option>
-                                <option class="filters-group__option option-select" value="8">8</option>
-                                <option class="filters-group__option option-select" value="16">16</option>
-                                <option class="filters-group__option option-select" value="32">32</option>
-                                <option class="filters-group__option option-select" value="64">64</option>
-                                <option class="filters-group__option option-select" value="128">128</option>
-                            </select>
-                            <button class="filters-group__button btn--remove" id="clear-btn">Clear all</button>
-                        </div>
-                        <div class="table" id="table-tournaments">
-                            <div class="table__header">
-                                <div class="table__item">
-                                    Name
-                                </div>
-                                <div class="table__item">Mode</div>
-                                <div class="table__item">Place</div>
-                                <div class="table__item">Start date</div>
-                                <div class="table__item">Last reg date</div>
-                                <div class="table__item">State</div>
-                                <div class="table__item">Level</div>
-                                <div class="table__item">Participants</div>
-                                <div class="table__item">Scenario</div>
-                                <div class="table__item">Actions</div>
-                            </div>
-                            <div class="table__content" id="tournamentsContainer">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="content" id="content-2">
-                        <h2 class="content__title">
-                            Create tournaments</h2>
-                        <form class="form" action="#" method="POST" autocomplete="off" name="modalForm">
-                            <label class="modal__dropdown-label">Name</label>
-                            <input class="modal__dropdown-input" type="text" name="name" required>
-                            <label class="modal__dropdown-label">Mode</label>
-                            <input class="modal__dropdown-input" type="text" name="mode" required>
-                            <label class="modal__dropdown-label">Place</label>
-                            <input class="modal__dropdown-input" type="text" name="place">
-                            <div class="form__textarea">
-                                <label class="modal__dropdown-label">Tournament description</label>
-                                <textarea class="modal__dropdown-textarea" name="textarea"></textarea>
-                            </div>
-                            <!-- textarea -->
-                            <div class="form__date">
-                                <label class="modal__dropdown-label">Start date</label>
-                                <input class="modal__dropdown-input" type="text" name="start-date"
-                                    onfocusin="(this.type='date')" onfocusout="(this.type='text')"
-                                    placeholder=" Start date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" />
-                                <label class="modal__dropdown-label">Last registration date</label>
-                                <input class="modal__dropdown-input" type="text" name="last-date"
-                                    onfocusin="(this.type='date')" onfocusout="(this.type='text')"
-                                    placeholder=" Start date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" />
-                            </div>
-                            <!-- radio- button -->
-                            <h3 class="form__name">Level</h3>
-                            <div class="form-checkboxes">
-                                <div class="radio">
-                                    <input class="custom-radio" id="advanced" value="ADVANCED" type="radio"
-                                        name="level">
-                                    <label for="advanced">
-                                        Advanced
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <input class="custom-radio" id="middle" value="MIDDLE" type="radio" name="level">
-                                    <label for="middle">
-                                        Middle
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <input class="custom-radio" id="begginer" value="BEGINNER" type="radio"
-                                        name="level">
-                                    <label for="begginer">
-                                        Beginner
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- radio- button Level -->
-                            <h3 class="form__name">Number of participants</h3>
-                            <div class="form-checkboxes">
-                                <div class="radio">
-                                    <input class="custom-radio" type="radio" id="participants-4" name="participants"
-                                        value="4">
-                                    <label for="participants-4">4</label>
-                                </div>
-                                <div class="radio">
-                                    <input class="custom-radio" type="radio" id="participants-8" name="participants"
-                                        value="8">
-                                    <label for="participants-8">8</label>
-                                </div>
-                                <div class="radio">
-                                    <input class="custom-radio" type="radio" id="participants-16" name="participants"
-                                        value="16">
-                                    <label for="participants-16">16</label>
-                                </div>
-                                <div class="radio">
-                                    <input class="custom-radio" type="radio" id="participants-32" name="participants"
-                                        value="32">
-                                    <label for="participants-32">32</label>
-                                </div>
-                                <div class="radio">
-                                    <input class="custom-radio" type="radio" id="participants-64" name="participants"
-                                        value="64">
-                                    <label for="participants-64">64</label>
-                                </div>
-                                <div class="radio">
-                                    <input class="custom-radio" type="radio" id="participants-128" name="participants"
-                                        value="128">
-                                    <label for="participants-128">128</label>
-                                </div>
-                            </div>
-                            <!-- Number of participants -->
-
-                            <h3 class="form__name">Scenario for participants</h3>
-                            <div class="form-checkboxes">
-                                <div class="radio">
-                                    <input class="custom-radio" id="one-match" value="ONE_MATCH_CONFRONTATION" type="radio"
-                                        name="match">
-                                    <label for="one-match">
-                                        One-match
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <input class="custom-radio" id="two-match" value="TWO_MATCH_CONFRONTATION" type="radio"
-                                        name="match">
-                                    <label for="two-match">
-                                        Two-match
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <input class="custom-radio" id="three-match" value="THREE_MATCH_CONFRONTATION" type="radio"
-                                        name="match">
-                                    <label for="three-match">
-                                        To three wins
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- radio- button Scenario for participants -->
-                            <select class="modal__dropdown-select" name="invite-user" id="invite-user">
-                                <option class="modal__dropdown-option" value="User 1">User 1
-                                </option>
-                                <option class="modal__dropdown-option" value="User 2">User 2</option>
-                                <option class="modal__dropdown-option" value="User 3">User 3</option>
-                                <option class="modal__dropdown-option" value="User 4">User 4</option>
-                                <option class="modal__dropdown-option" value="User 5">User 5</option>
-                            </select>
-                            <!-- select invites -->
-                            <div class="btn-container">
-                                <button class="form__button form__button--create"
-                                    id="btn-submit">Create</button>
-                                <button class="form__button form__button--cancel" id="btn-cancel"><span
-                                        class="underline">Cancel</span></button>
-                            </div>
-                            <div id="form-error"></div>
-                        </form>
-                    </div>
-                    <div class="content" id="content-3">
-                        Some 3
-                    </div>
+      <section class="main-page">
+        <div class="container">
+          <div class="tabs" id="admin-tabs">
+            <input
+              class="tabs__input tabs--hide"
+              type="radio"
+              name="tab-btn"
+              id="tab-btn-1"
+              checked
+            />
+            <label class="tabs__input tabs--hide" for="tab-btn-1"
+              >Tournaments</label
+            >
+            <input
+              class="tabs__input tabs--hide"
+              type="radio"
+              name="tab-btn"
+              id="tab-btn-2"
+            />
+            <label class="tabs__input tabs--hide" for="tab-btn-2"
+              >Create tournament</label
+            >
+            <input
+              class="tabs__input tabs--hide"
+              type="radio"
+              name="tab-btn"
+              id="tab-btn-3"
+            />
+            <label class="tabs__input tabs--hide" for="tab-btn-3">Stats</label>
+            <div class="content" id="content-1">
+              <div class="filters-group">
+                <label for="filter-start-date"></label>
+                <input
+                  class="filters-group__input"
+                  id="filter-start-date"
+                  type="text"
+                  onfocusin="(this.type='date')"
+                  onfocusout="(this.type='text')"
+                  name="start-date"
+                  placeholder="Search by start date"
+                />
+                <label for="filter-reg-date"></label>
+                <input
+                  class="filters-group__input"
+                  id="filter-reg-date"
+                  type="text"
+                  onfocusin="(this.type='date')"
+                  onfocusout="(this.type='text')"
+                  name="reg-date"
+                  placeholder="Search by reg date"
+                />
+                <select class="filters-group__input" name="file" id="state">
+                  <option
+                    class="filters-group__option option-select"
+                    value="Search by state"
+                    selected
+                  >
+                    Search by state
+                  </option>
+                  <option
+                    class="filters-group__option option-select"
+                    value="all"
+                  >
+                    all
+                  </option>
+                  <option
+                    class="filters-group__option option-select"
+                    value="in progress"
+                  >
+                    in progress
+                  </option>
+                  <option
+                    class="filters-group__option option-select"
+                    value="registration"
+                  >
+                    registration
+                  </option>
+                </select>
+                <select
+                  class="filters-group__input"
+                  name="file"
+                  id="participants"
+                >
+                  <option
+                    class="filters-group__option option-select"
+                    value="Select by participants"
+                    selected
+                  >
+                    Select by participants
+                  </option>
+                  <option
+                    class="filters-group__option option-select"
+                    value="all"
+                  >
+                    all
+                  </option>
+                  <option class="filters-group__option option-select" value="4">
+                    4
+                  </option>
+                  <option class="filters-group__option option-select" value="8">
+                    8
+                  </option>
+                  <option
+                    class="filters-group__option option-select"
+                    value="16"
+                  >
+                    16
+                  </option>
+                  <option
+                    class="filters-group__option option-select"
+                    value="32"
+                  >
+                    32
+                  </option>
+                  <option
+                    class="filters-group__option option-select"
+                    value="64"
+                  >
+                    64
+                  </option>
+                  <option
+                    class="filters-group__option option-select"
+                    value="128"
+                  >
+                    128
+                  </option>
+                </select>
+                <button class="filters-group__button" id="clear-btn">
+                  Clear all
+                </button>
+              </div>
+              <div class="table" id="table-tournaments">
+                <div class="table__header">
+                  <div class="table__item">Name</div>
+                  <div class="table__item">Mode</div>
+                  <div class="table__item">Place</div>
+                  <div class="table__item">Start date</div>
+                  <div class="table__item">Last reg date</div>
+                  <div class="table__item">State</div>
+                  <div class="table__item">Level</div>
+                  <div class="table__item">Participants</div>
+                  <div class="table__item">Scenario</div>
+                  <div class="table__item">Actions</div>
                 </div>
-                <!-- tabs -->
+                <div class="table__content" id="tournamentsContainer"></div>
+              </div>
             </div>
-            <!-- container -->
-        </section>
-        <!-- section -->
-    </main>
-</body>
+            <div class="content" id="content-2">
+              <h2 class="content__title">Create tournaments</h2>
+              <form class="form" name="modalForm">
+                <label class="modal__dropdown-label">Name</label>
+                <input
+                  class="modal__dropdown-input"
+                  type="text"
+                  name="name"
+                  required
+                />
+                <label class="modal__dropdown-label">Mode</label>
+                <input
+                  class="modal__dropdown-input"
+                  type="text"
+                  name="mode"
+                  required
+                />
+                <label class="modal__dropdown-label">Place</label>
+                <input class="modal__dropdown-input" type="text" name="place" />
+                <div class="form__textarea">
+                  <label class="modal__dropdown-label"
+                    >Tournament description</label
+                  >
+                  <textarea
+                    class="modal__dropdown-textarea"
+                    name="textarea"
+                  ></textarea>
+                </div>
+                <!-- textarea -->
+                <div class="form__date">
+                  <label class="modal__dropdown-label">Start date</label>
+                  <input
+                    class="modal__dropdown-input"
+                    type="text"
+                    name="start-date"
+                    onfocusin="(this.type='date')"
+                    onfocusout="(this.type='text')"
+                    placeholder=" Start date"
+                    required
+                    pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+                  />
+                  <label class="modal__dropdown-label"
+                    >Last registration date</label
+                  >
+                  <input
+                    class="modal__dropdown-input"
+                    type="text"
+                    name="last-date"
+                    onfocusin="(this.type='date')"
+                    onfocusout="(this.type='text')"
+                    placeholder=" Start date"
+                    required
+                    pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+                  />
+                </div>
+                <!-- radio- button -->
+                <h3 class="form__name">Level</h3>
+                <div class="form-checkboxes">
+                  <div class="radio">
+                    <input
+                      class="custom-radio"
+                      id="advanced"
+                      value="ADVANCED"
+                      type="radio"
+                      name="level"
+                    />
+                    <label for="advanced"> Advanced </label>
+                  </div>
+                  <div class="radio">
+                    <input
+                      class="custom-radio"
+                      id="middle"
+                      value="MIDDLE"
+                      type="radio"
+                      name="level"
+                    />
+                    <label for="middle"> Middle </label>
+                  </div>
+                  <div class="radio">
+                    <input
+                      class="custom-radio"
+                      id="begginer"
+                      value="BEGINNER"
+                      type="radio"
+                      name="level"
+                    />
+                    <label for="begginer"> Beginner </label>
+                  </div>
+                </div>
+                <!-- radio- button Level -->
+                <h3 class="form__name">Number of participants</h3>
+                <div class="form-checkboxes">
+                  <div class="radio">
+                    <input
+                      class="custom-radio"
+                      type="radio"
+                      id="participants-4"
+                      name="participants"
+                      value="4"
+                    />
+                    <label for="participants-4">4</label>
+                  </div>
+                  <div class="radio">
+                    <input
+                      class="custom-radio"
+                      type="radio"
+                      id="participants-8"
+                      name="participants"
+                      value="8"
+                    />
+                    <label for="participants-8">8</label>
+                  </div>
+                  <div class="radio">
+                    <input
+                      class="custom-radio"
+                      type="radio"
+                      id="participants-16"
+                      name="participants"
+                      value="16"
+                    />
+                    <label for="participants-16">16</label>
+                  </div>
+                  <div class="radio">
+                    <input
+                      class="custom-radio"
+                      type="radio"
+                      id="participants-32"
+                      name="participants"
+                      value="32"
+                    />
+                    <label for="participants-32">32</label>
+                  </div>
+                  <div class="radio">
+                    <input
+                      class="custom-radio"
+                      type="radio"
+                      id="participants-64"
+                      name="participants"
+                      value="64"
+                    />
+                    <label for="participants-64">64</label>
+                  </div>
+                  <div class="radio">
+                    <input
+                      class="custom-radio"
+                      type="radio"
+                      id="participants-128"
+                      name="participants"
+                      value="128"
+                    />
+                    <label for="participants-128">128</label>
+                  </div>
+                </div>
+                <!-- Number of participants -->
 
+                <h3 class="form__name">Scenario for participants</h3>
+                <div class="form-checkboxes">
+                  <div class="radio">
+                    <input
+                      class="custom-radio"
+                      id="one-match"
+                      value="ONE_MATCH_CONFRONTATION"
+                      type="radio"
+                      name="match"
+                    />
+                    <label for="one-match"> One-match </label>
+                  </div>
+                  <div class="radio">
+                    <input
+                      class="custom-radio"
+                      id="two-match"
+                      value="TWO_MATCH_CONFRONTATION"
+                      type="radio"
+                      name="match"
+                    />
+                    <label for="two-match"> Two-match </label>
+                  </div>
+                  <div class="radio">
+                    <input
+                      class="custom-radio"
+                      id="three-match"
+                      value="THREE_MATCH_CONFRONTATION"
+                      type="radio"
+                      name="match"
+                    />
+                    <label for="three-match"> To three wins </label>
+                  </div>
+                </div>
+                <!-- radio- button Scenario for participants -->
+                <select
+                  class="modal__dropdown-select"
+                  name="invite-user"
+                  id="invite-user"
+                >
+                  <option class="modal__dropdown-option" value="User 1">
+                    User 1
+                  </option>
+                  <option class="modal__dropdown-option" value="User 2">
+                    User 2
+                  </option>
+                  <option class="modal__dropdown-option" value="User 3">
+                    User 3
+                  </option>
+                  <option class="modal__dropdown-option" value="User 4">
+                    User 4
+                  </option>
+                  <option class="modal__dropdown-option" value="User 5">
+                    User 5
+                  </option>
+                </select>
+                <!-- select invites -->
+                <div class="btn-container">
+                  <button
+                    class="form__button form__button--create"
+                    id="btn-submit"
+                  >
+                    Create
+                  </button>
+                  <button
+                    class="form__button form__button--cancel"
+                    id="btn-cancel"
+                  >
+                    <span class="underline">Cancel</span>
+                  </button>
+                </div>
+                <div id="form-error"></div>
+              </form>
+            </div>
+            <div class="content" id="content-3">Some 3</div>
+          </div>
+          <!-- tabs -->
+        </div>
+        <!-- container -->
+      </section>
+      <!-- section -->
+    </main>
+  </body>
 </html>

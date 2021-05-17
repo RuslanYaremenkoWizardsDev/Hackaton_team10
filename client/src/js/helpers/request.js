@@ -1,6 +1,6 @@
 export const URL = `https://web-application-grading.herokuapp.com/`;
 
-export const getRequest = async (url, options={method: 'GET'}) => {
+export const getRequest = async (url, options = { method: "GET" }) => {
   const answer = await fetch(url, options);
   console.log(answer);
   return answer.json();
@@ -8,8 +8,7 @@ export const getRequest = async (url, options={method: 'GET'}) => {
 export const postRequest = async (url, options) => {
   const answer = await fetch(url, options);
   const kek = await answer.json();
-  return {body: kek, status: answer.status}
-
+  return { body: kek, status: answer.status };
 };
 export const putRequest = async (url, options) => {
   const answer = await fetch(url, options);

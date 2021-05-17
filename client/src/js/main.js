@@ -1,6 +1,6 @@
 import "../css/main.scss";
-import { renderAllTournaments } from "./helpers/getTournaments.js";
-import { getRequest, URL } from "./helpers/request.js";
+import { renderAllTournaments } from "./helpers/render.js";
+import { getRequest, URL , postRequest} from "./helpers/request.js";
 import { checkRoles } from "./helpers/checkRoles.js";
 
 
@@ -11,13 +11,17 @@ export const MainInit = () => {
   const selectState = document.getElementById("state");
   const tabsInput = document.querySelectorAll(".tabs--hide");
   const nav = document.getElementById("nav");
+
   checkRoles(tabsInput, nav);
-  
   getRequest(URL+'tournament').then((data) => {
     console.log(data);
     renderAllTournaments(data);
     localStorage.setItem("data", JSON.stringify(data));
   });
+  postRequest(URL+'admin/tournament',{method: 'POST'}).then((data) => {
+
+    console.log(data);
+  })
 
   selectState.addEventListener("change", (e) => {
     let data = JSON.parse(localStorage.getItem("data"));

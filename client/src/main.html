@@ -170,14 +170,13 @@
                 <div class="table__header">
                   <div class="table__item">Name</div>
                   <div class="table__item">Mode</div>
+                  <div class="table__item">Description</div>
                   <div class="table__item">Place</div>
                   <div class="table__item">Start date</div>
                   <div class="table__item">Last reg date</div>
-                  <div class="table__item">State</div>
                   <div class="table__item">Level</div>
                   <div class="table__item">Participants</div>
                   <div class="table__item">Scenario</div>
-                  <div class="table__item">Actions</div>
                 </div>
                 <div class="table__content" id="tournamentsContainer"></div>
               </div>
@@ -417,6 +416,25 @@
         <!-- container -->
       </section>
       <!-- section -->
+
+
+      </div>
     </main>
+    <div class="settings__modal hidden">
+      <div class="setting__content">
+        <div class="exit"><button id='exit'>X</button></div>
+        <div class="setting__field">
+          <input type='text' id='oldLogin' placeholder="Old login" class=" filters-group__input">
+          <input type='text' id='newLogin' placeholder="New Login" class="filters-group__input">
+          <p class+="modal_error" id="loginError"></p>
+          <button id='changeLogin' class="filters-group__button">Change Login</button>
+        </div>
+        <div class="setting__field">
+          <input type='text' id='oldPassword' placeholder="Old password" class="filters-group__input">
+          <input type='text' id='newPassword' placeholder="password" class="filters-group__input">
+          <p class+="modal_error" id="passwordError"></p>
+          <button id='changePassword' class="filters-group__button">Change Password</button>
+        </div>
+      </div>
   </body>
 </html>

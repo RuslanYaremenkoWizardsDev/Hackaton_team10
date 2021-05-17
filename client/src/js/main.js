@@ -1,11 +1,19 @@
 import "../css/main.scss";
-import { getRequest, postRequest, URL } from "./helpers/request.js";
-import { createTournament } from "./helpers/createTournament.js";
-import { checkRoles } from "./helpers/checkRoles.js";
-import { renderAllTournaments, cleaner, changer } from "./helpers/render.js";
-import { setLocalStorage,getLocalStorage } from "./helpers/localStorageOperations.js";
-import {redirect} from './helpers/redirect.js'
-import {killCookie} from './helpers/cookieHelper.js'
+import { getRequest, postRequest, URL, putRequest } from "./helpers/request.js";
+import { checkRoles, redirect, hide, show } from "./helpers/general.js";
+import { compare } from "./helpers/validation.js";
+import {
+  renderAllTournaments,
+  cleaner,
+  changer,
+  createTournament,
+  renderError,
+} from "./helpers/render.js";
+import {
+  setLocalStorage,
+  getLocalStorage,
+} from "./helpers/localStorageOperations.js";
+import { killCookie } from "./helpers/cookieHelper.js";
 
 export const MainInit = () => {
   const selectParticipants = document.getElementById("participants");
@@ -17,18 +25,25 @@ export const MainInit = () => {
   const clearAll = document.getElementById("clear-btn");
   const create = document.querySelector(".form__button--create");
   const table = document.querySelector("#tournamentsContainer");
-  const logout = document.querySelector('.header__nav-btn--logout');
+  const logout = document.querySelector(".header__nav-btn--logout");
+  const settings = document.querySelector(".header__nav-img");
+  const settingsModal = document.querySelector(".settings__modal");
+  const exitModal = document.querySelector("#exit");
+  const changeLogin = document.querySelector("#changeLogin");
+  const changePassword = document.querySelector("#changePassword");
 
   checkRoles(tabsInput, nav);
   checkRoles(tabsInput, nav);
   getRequest(URL + "tournament").then((data) => {
     renderAllTournaments(data);
-    setLocalStorage('data', data);
+    setLocalStorage("data", data);
   });
 
   selectState.addEventListener("change", (e) => {
-    let data = getLocalStorage('data');
-    if (e.target.value === "all") {return renderAllTournaments(data)}
+    let data = getLocalStorage("data");
+    if (e.target.value === "all") {
+      return renderAllTournaments(data);
+    }
     data = data.filter((el) => el.status === e.target.value);
     table.innerHTML = "";
     renderAllTournaments(data);
@@ -69,19 +84,53 @@ export const MainInit = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newTournament),
     };
+    console.log(options.body);
     postRequest(URL + "admin/tournament", options).then((data) => {
       if (data === "done")
         getRequest(URL + "tournament").then((data) => {
           renderAllTournaments(data);
-          setLocalStorage('data', data);
+          setLocalStorage("data", data);
         });
     });
   });
-  logout.addEventListener('click', (e) => {
-    killCookie('token');
-    setLocalStorage('data', '');
-    setLocalStorage('role', '');
-    redirect('index.html');
+  logout.addEventListener("click", (e) => {
+    killCookie("token");
+    setLocalStorage("data", "");
+    setLocalStorage("role", "");
+    redirect("index.html");
+  });
+  settings.addEventListener("click", (e) => show(settingsModal));
+  settingsModal.addEventListener("click", (e) => {
+    if (e.target.classList.contains("settings__modal")) hide(settingsModal);
+  });
+  exitModal.addEventListener("click", (e) => hide(settingsModal));
+  changeLogin.addEventListener("click", (e) => {
+    const ModalOldLogin = document.querySelector("#oldLogin");
+    const ModalNewLogin = document.querySelector("#newLogin");
+    const options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      cors: "no-cors",
+      body: JSON.stringify({
+        oldLogin: ModalOldLogin.value,
+        newLogin: ModalNewLogin.value,
+      }),
+    };
+    putRequest(URL + "user", options).then((data) => hide(settingsModal));
+  });
+  changePassword.addEventListener("click", (e) => {
+    const ModalOldPassword = document.querySelector("#oldPassword");
+    const ModalNewPassword = document.querySelector("#newPassword");
+    const options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      cors: "no-cors",
+      body: JSON.stringify({
+        oldLogin: ModalOldPassword.value,
+        newLogin: ModalNewPassword.value,
+      }),
+    };
+    putRequest(URL + "user", options).then((data) => hide(settingsModal));
   });
 };
 MainInit();

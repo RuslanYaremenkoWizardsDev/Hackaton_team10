@@ -6,8 +6,8 @@ export const getRequest = async (url, options = { method: "GET" }) => {
 };
 export const postRequest = async (url, options) => {
   const answer = await fetch(url, options);
-  const kek = await answer.json();
-  return { body: kek, status: answer.status };
+  const body = await answer.json();
+  return { body, status: answer.status };
 };
 export const putRequest = async (url, options) => {
   const answer = await fetch(url, options);
